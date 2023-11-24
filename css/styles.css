@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&display=swap');
 
 * {
     margin: 0;
@@ -111,6 +112,13 @@ body {
     color: #0a4650;
   }
 
+  .btn-secondary {
+    margin-left: 1vw;
+    width: 6.5vw;
+    background-color: #feffff;
+    color: #0a4650;
+  }
+
   .btn-primary:hover {
     background-color: #0a4650; 
     color: white; 
@@ -121,11 +129,21 @@ body {
     color: white; 
   }
 
+  .btn-secondary:hover {
+    background-color: #0a4650; 
+    color: white; 
+  }
+
+  .btn-secondary:focus {
+    background-color: #0a4650; 
+    color: white; 
+  }
+
   .container2 {
     width: 60vw;
     margin-left: 20vw;
     position: relative;
-    border: 2px solid #9aa9b3;
+    border: 1px solid #9aa9b3;
     border-radius: 3px;
     transition: 0.2s;
     padding: 50px;
@@ -137,10 +155,69 @@ body {
     margin-top: 1vw;
     width: 60vw;
     position: relative;
-    border: 2px solid #9aa9b3;
+    border: 1px solid #9aa9b3;
     border-radius: 3px;
     transition: 0.2s;
     padding: 25px;
     background-color: white;
 
+}
+
+.dropdown-container {
+    margin-left: 20vw;
+    margin-top: 1vw;
+    width: 60vw;
+    height: 40vh;
+    position: relative;
+    border: 1px solid #9aa9b3;
+    border-radius: 3px;
+    transition: 0.2s;
+    padding: 45px;
+    background-color: white;
+    display: flex;
+    
+}
+
+.label-str {
+  font-size: 22px;
+ 
+}
+
+.dropdown1 {
+  margin-left: 3vw;
+  display: flex;
+  
+}
+
+.label-str-min {
+  margin-left: 10px;
+}
+
+.dropdown2 {
+  display: flex;
+  margin-left: 12vw;
+}
+
+.dropdown {
+  margin-left: 16px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.col-lg-6 {
+  margin-left: 3.6vw;
+  width: 62vw;
 }
