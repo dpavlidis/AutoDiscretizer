@@ -4,19 +4,58 @@ $(document).ready(function () {
     var checkboxNames2 = [];
 
 
-    $(document).on('change', '.file-input', function() {
+    $('.cst2').click(function (event) {
+        event.preventDefault();
+
+        var selectedValue = $(this).text();
+
+        $('.btn2').text(selectedValue);
+    });
+
+    $('.cst1').click(function (event) {
+        event.preventDefault();
+
+        var selectedValue = $(this).text();
+
+        $('.btn1').text(selectedValue);
+
+        if (selectedValue === 'Auto') {
+            $('.display-div').show();
+        } else {
+            $('.display-div').hide();
+        }
+    });
+
+    var questionIcon = document.getElementById('questionIcon');
+    var textDiv = document.getElementById('displayText');
+
+    questionIcon.addEventListener('mouseover', function () {
+        textDiv.style.display = 'block';
+    });
+
+    questionIcon.addEventListener('mouseout', function () {
+        textDiv.style.display = 'none';
+    });
+
+    $('#exampleCheck1').change(function () {
+        var hiddenDiv = $('.display-div');
+        hiddenDiv.toggle(this.checked);
+    });
+
+
+    $(document).on('change', '.file-input', function () {
         var filesCount = $(this)[0].files.length;
         var textbox = $(this).prev();
-      
-        if (filesCount === 1) {
-          var fileName = $(this).val().split('\\').pop();
-          textbox.text(fileName);
-        } else {
-          textbox.text('Please select only one file');
-        }
-      });
 
-      
+        if (filesCount === 1) {
+            var fileName = $(this).val().split('\\').pop();
+            textbox.text(fileName);
+        } else {
+            textbox.text('Please select only one file');
+        }
+    });
+
+
     $('#submitBtn').on('click', function () {
 
         $('#message').show();
@@ -54,7 +93,7 @@ $(document).ready(function () {
                     processData: false,
                     dataType: 'json',
                     success: function (response) {
-                        
+
                         console.log("data from naive_bayes.php: " + response);
 
                         $('#spinner-border').show();
