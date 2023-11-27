@@ -12,19 +12,38 @@ $(document).ready(function () {
         $('.btn2').text(selectedValue);
     });
 
+    // ------------------------------------------------------- Auto check:
+
     $('.cst1').click(function (event) {
         event.preventDefault();
 
         var selectedValue = $(this).text();
+        var isChecked = $('#exampleCheck1').is(':checked');
 
         $('.btn1').text(selectedValue);
 
-        if (selectedValue === 'Auto') {
+        if (isChecked || selectedValue === 'Auto') {
             $('.display-div').show();
         } else {
             $('.display-div').hide();
         }
     });
+
+    $('#exampleCheck1').change(function () {
+        var selectedValue = $('.btn1').text();
+        var isChecked = $('#exampleCheck1').is(':checked');
+
+        $('.btn1').text(selectedValue);
+
+        if (isChecked || selectedValue === 'Auto') {
+            $('.display-div').show();
+        } else {
+            $('.display-div').hide();
+        }
+    });
+
+
+    // -------------------------------------------------------
 
     var questionIcon = document.getElementById('questionIcon');
     var textDiv = document.getElementById('displayText');
@@ -35,11 +54,6 @@ $(document).ready(function () {
 
     questionIcon.addEventListener('mouseout', function () {
         textDiv.style.display = 'none';
-    });
-
-    $('#exampleCheck1').change(function () {
-        var hiddenDiv = $('.display-div');
-        hiddenDiv.toggle(this.checked);
     });
 
 
