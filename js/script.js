@@ -33,6 +33,12 @@ $(document).ready(function () {
         var selectedValue = $('.btn1').text();
         var isChecked = $('#exampleCheck1').is(':checked');
 
+        var enterBinsInput = $("#exampleInputEmail1");
+        if (isChecked) {
+            enterBinsInput.prop("disabled", true);
+        } else {
+            enterBinsInput.prop("disabled", false);
+        }
         $('.btn1').text(selectedValue);
 
         if (isChecked || selectedValue === 'Auto') {
