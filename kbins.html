@@ -17,6 +17,7 @@
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="assets/favicons/favicon.ico">
 
+  <!-- Font Awesome Kit -->
   <script src="https://kit.fontawesome.com/8733652a34.js" crossorigin="anonymous"></script>
 
   <!-- jQuery -->
@@ -59,34 +60,18 @@
           <li class="nav-item">
             <a class="nav-link" href="">Rate us</a>
           </li>
-          <!--
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-              </li>
-            -->
         </ul>
       </div>
     </div>
   </nav>
 
-  <div class="main-container">
 
+  <div class="upload-container">
     <div class="container d-flex justify-content-center mt-100">
       <div class="row">
         <div class="col-md-12">
 
-          <h3 class="tittle-class">Upload Dataset</h3>
+          <h3>Upload Dataset</h3>
 
           <div class="file-drop-area">
             <span class="choose-file-button">Choose file</span>
@@ -94,18 +79,12 @@
             <input class="file-input" type="file" multiple>
 
           </div>
-
-
         </div>
-
       </div>
-
-
     </div>
   </div>
 
   <button type="button" class="btn btn-primary">
-
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-upload"
       viewBox="0 0 16 16">
       <path
@@ -180,6 +159,7 @@
     </table>
   </div>
 
+
   <div class="checkbox-container">
 
     <div class="form-check form-check-inline">
@@ -235,90 +215,87 @@
   </div>
 
 
-
   <div class="method-container">
 
-    <div class="dropdown1">
+    <div class="dropdown-strategy">
       <div class="label-str">
         <i class="fas fa-info-circle"></i>
         <label class="label-str-min">Select Strategy:</label>
       </div>
 
-      <div class="dropdown-min">
-        <button class="btn btn-secondary dropdown-toggle btn1" type="button" data-bs-toggle="dropdown"
+      <div class="dropdown-min-strategy">
+        <button class="btn btn-secondary dropdown-toggle btn-method" type="button" data-bs-toggle="dropdown"
           aria-expanded="false">
           Method
         </button>
         <ul class="dropdown-menu dropdown-menu-dark">
-          <li><a class="dropdown-item cst1 active" href="#">Uniform</a></li>
-          <li><a class="dropdown-item cst1" href="#">Quantile</a></li>
-          <li><a class="dropdown-item cst1" href="#">Kmeans</a></li>
+          <li><a class="dropdown-item cst-strategy active" href="#">Uniform</a></li>
+          <li><a class="dropdown-item cst-strategy" href="#">Quantile</a></li>
+          <li><a class="dropdown-item cst-strategy" href="#">Kmeans</a></li>
           <li>
             <hr class="dropdown-divider">
           </li>
-          <li><a class="dropdown-item cst1" href="#">Auto</a></li>
+          <li><a class="dropdown-item cst-strategy" href="#">Auto</a></li>
         </ul>
       </div>
     </div>
 
+
     <div class="display-div">
-      <div class="dropdown2">
+      <div class="dropdown-class">
         <div class="label-str">
           <i class="fas fa-info-circle"></i>
           <label class="label-str-min">Select Class:</label>
         </div>
 
-        <div class="dropdown-min">
-          <button class="btn btn-secondary dropdown-toggle btn2" type="button" data-bs-toggle="dropdown"
+        <div class="dropdown-min-class">
+          <button class="btn btn-secondary dropdown-toggle btn-class" type="button" data-bs-toggle="dropdown"
             aria-expanded="false">
             Class
           </button>
           <ul class="dropdown-menu dropdown-menu-dark">
-            <li><a class="dropdown-item cst2 active" href="#">Class 1</a></li>
-            <li><a class="dropdown-item cst2" href="#">Class 2</a></li>
-            <li><a class="dropdown-item cst2" href="#">Class 3</a></li>
-            <li><a class="dropdown-item cst2" href="#">Class 4</a></li>
-            <li><a class="dropdown-item cst2" href="#">Class 5</a></li>
-            <li><a class="dropdown-item cst2" href="#">Class 6</a></li>
-            <li><a class="dropdown-item cst2" href="#">Class 7</a></li>
-            <li><a class="dropdown-item cst2" href="#">Class 8</a></li>
-            <li><a class="dropdown-item cst2" href="#">Class 9</a></li>
-            <li><a class="dropdown-item cst2" href="#">Class 10</a></li>
-            <li><a class="dropdown-item cst2" href="#">Class 11</a></li>
-            <li><a class="dropdown-item cst2" href="#">Class 12</a></li>
+            <li><a class="dropdown-item cst-class active" href="#">Class 1</a></li>
+            <li><a class="dropdown-item cst-class" href="#">Class 2</a></li>
+            <li><a class="dropdown-item cst-class" href="#">Class 3</a></li>
+            <li><a class="dropdown-item cst-class" href="#">Class 4</a></li>
+            <li><a class="dropdown-item cst-class" href="#">Class 5</a></li>
+            <li><a class="dropdown-item cst-class" href="#">Class 6</a></li>
+            <li><a class="dropdown-item cst-class" href="#">Class 7</a></li>
+            <li><a class="dropdown-item cst-class" href="#">Class 8</a></li>
+            <li><a class="dropdown-item cst-class" href="#">Class 9</a></li>
+            <li><a class="dropdown-item cst-class" href="#">Class 10</a></li>
+            <li><a class="dropdown-item cst-class" href="#">Class 11</a></li>
+            <li><a class="dropdown-item cst-class" href="#">Class 12</a></li>
           </ul>
         </div>
       </div>
     </div>
-
-
   </div>
 
 
   <div class="bins-container">
-
-    <div class="mb-3 costm-cl">
+    <div class="mb-3 cst-bins">
       <div class="label-str2">
         <i class="fas fa-info-circle"></i>
-        <label for="exampleInputEmail1" class="form-label">Enter Bins:</label>
+        <label for="InputBins" class="form-label">Enter Bins:</label>
       </div>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      <div id="emailHelp" class="form-text">
+      <input type="number" class="form-control" id="InputBins" aria-describedby="binsHelp" min="2" max="20">
+      <div id="binsHelp" class="form-text">
         <i class="fa-solid fa-circle-exclamation"></i>
-        Enter the number of Bins > 2
+        Enter the number of Bins &gt; 2
       </div>
     </div>
 
 
     <div class="mb-3 form-check icon-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">Auto</label>
+      <input type="checkbox" class="form-check-input" id="autoCheck">
+      <label class="form-check-label" for="autoCheck">Auto</label>
       <i class="fa-solid fa-circle-question" id="questionIcon"></i>
       <div id="displayText" class="hidden">Auto gives the best number of bins</div>
     </div>
 
 
-    <button type="button" class="btn btn-primary cst-but">
+    <button type="button" class="btn btn-primary cst-Disc">
       <i class="fa-solid fa-arrow-down-short-wide"></i> Discretization
     </button>
 
@@ -388,18 +365,15 @@
     </table>
   </div>
 
-  <button type="button" class="btn btn-primary down">
+
+  <button type="button" class="btn btn-primary down-but">
     <i class="fa-solid fa-cloud-arrow-down"></i> Download
   </button>
 
 
-
   <footer class="bg-body-tertiary text-center text-lg-start">
-    <!-- Grid container -->
     <div class="container p-4">
-      <!--Grid row-->
       <div class="row">
-        <!--Grid column-->
         <div class="col-lg-6 col-md-15 mb-4 mb-md-0">
           <h5 class="text">KBinsDiscretizer</h5>
 
@@ -410,18 +384,12 @@
           </p>
         </div>
       </div>
-      <!--Grid row-->
     </div>
-    <!-- Grid container -->
-
-    <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
       © 2024 Copyright:
       <a class="text-body" href="#">KBinsDiscretizer</a>
     </div>
-    <!-- Copyright -->
   </footer>
-
 
 </body>
 

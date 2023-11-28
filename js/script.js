@@ -1,26 +1,24 @@
 $(document).ready(function () {
 
-    var checkboxNames = [];
-    var checkboxNames2 = [];
+    
 
-
-    $('.cst2').click(function (event) {
+    $('.cst-class').click(function (event) {
         event.preventDefault();
 
         var selectedValue = $(this).text();
 
-        $('.btn2').text(selectedValue);
+        $('.btn-class').text(selectedValue);
     });
 
     // ------------------------------------------------------- Auto check:
 
-    $('.cst1').click(function (event) {
+    $('.cst-strategy').click(function (event) {
         event.preventDefault();
 
         var selectedValue = $(this).text();
-        var isChecked = $('#exampleCheck1').is(':checked');
+        var isChecked = $('#autoCheck').is(':checked');
 
-        $('.btn1').text(selectedValue);
+        $('.btn-method').text(selectedValue);
 
         if (isChecked || selectedValue === 'Auto') {
             $('.display-div').show();
@@ -29,17 +27,17 @@ $(document).ready(function () {
         }
     });
 
-    $('#exampleCheck1').change(function () {
-        var selectedValue = $('.btn1').text();
-        var isChecked = $('#exampleCheck1').is(':checked');
+    $('#autoCheck').change(function () {
+        var selectedValue = $('.btn-method').text();
+        var isChecked = $('#autoCheck').is(':checked');
 
-        var enterBinsInput = $("#exampleInputEmail1");
+        var enterBinsInput = $("#InputBins");
         if (isChecked) {
             enterBinsInput.prop("disabled", true);
         } else {
             enterBinsInput.prop("disabled", false);
         }
-        $('.btn1').text(selectedValue);
+        $('.btn-method').text(selectedValue);
 
         if (isChecked || selectedValue === 'Auto') {
             $('.display-div').show();
@@ -48,8 +46,7 @@ $(document).ready(function () {
         }
     });
 
-
-    // -------------------------------------------------------
+    // ------------------------------------------------------- Auto check end.
 
     var questionIcon = document.getElementById('questionIcon');
     var textDiv = document.getElementById('displayText');
@@ -74,6 +71,53 @@ $(document).ready(function () {
             textbox.text('Please select only one file');
         }
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// -----------------------------------------------------------------------------------------------------------------------------
+
+
+    var checkboxNames = [];
+    var checkboxNames2 = [];
 
 
     $('#submitBtn').on('click', function () {

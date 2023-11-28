@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,100;300&display=swap');
 
 * {
   margin: 0;
@@ -28,7 +27,6 @@ body {
 }
 
 .navbar-brand img {
-
   height: 1.7em;
 }
 
@@ -36,7 +34,7 @@ body {
   font-size: 1.2em;
 }
 
-.main-container {
+.upload-container {
   margin-top: 2.2vw;
   margin-left: 20vw;
   width: 60vw;
@@ -63,7 +61,6 @@ body {
   border: 1px dashed rgba(255, 255, 255, 0.4);
   border-radius: 3px;
   transition: 0.2s;
-
 }
 
 .choose-file-button {
@@ -80,7 +77,6 @@ body {
 }
 
 .file-message {
-  font-size: small;
   font-weight: 300;
   line-height: 1.4;
   white-space: nowrap;
@@ -97,7 +93,6 @@ body {
   width: 100%;
   cursor: pointer;
   opacity: 0;
-
 }
 
 .mt-100 {
@@ -112,7 +107,7 @@ body {
   color: #0a4650;
 }
 
-.cst-but {
+.cst-Disc {
   border-color: #060f11;
   margin-left: 18.5vw;
   margin-top: 30px;
@@ -129,35 +124,14 @@ body {
   color: #0a4650;
 }
 
-.btn-primary:hover {
-  background-color: #0a4650;
-  color: white;
-}
-
-.cst-but:hover {
-  background-color: #0a4650;
-  color: white;
-}
-
-.btn-primary:focus {
-  background-color: #0a4650;
-  color: white;
-}
-
-.cst-but:focus {
-  background-color: #0a4650;
-  color: white;
-}
-
-.btn-secondary:hover {
-  background-color: #0a4650;
-  color: white;
-}
-
+.btn-primary:hover,
+.btn-primary:focus,
+.cst-Disc:hover,
+.cst-Disc:focus,
+.btn-secondary:hover,
 .btn-secondary:focus {
   background-color: #0a4650;
   color: white;
-
 }
 
 .table-container,
@@ -182,7 +156,6 @@ body {
   transition: 0.2s;
   padding: 40px;
   background-color: white;
-
 }
 
 .method-container {
@@ -207,12 +180,12 @@ body {
   margin-left: 12px;
 }
 
-.dropdown1 {
+.dropdown-strategy {
   display: flex;
   margin-left: 2vw;
 }
 
-.dropdown2 {
+.dropdown-class {
   display: flex;
   margin-right: 5vw;
 }
@@ -221,7 +194,7 @@ body {
   display: none;
 }
 
-.dropdown-min {
+.dropdown-min-strategy {
   margin-left: 15px;
 }
 
@@ -246,7 +219,7 @@ body {
   margin-left: 12px;
 }
 
-.costm-cl {
+.cst-bins {
   margin-left: 2vw;
 }
 
@@ -285,7 +258,6 @@ body {
 .down-but {
   margin-top: 1.5vh;
 }
-
 
 .col-lg-6 {
   margin-left: 3.6vw;
