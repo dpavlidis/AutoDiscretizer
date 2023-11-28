@@ -1,71 +1,54 @@
 $(document).ready(function () {
 
-    
 
+    // Function to show/hide the display-div
+    function toggleDisplayDiv(selectedValue, isChecked) {
+        if (isChecked || selectedValue === 'Auto') {
+            $('.display-div').show();
+        } else {
+            $('.display-div').hide();
+        }
+    }
+
+    // Event handler for cst-class click
     $('.cst-class').click(function (event) {
         event.preventDefault();
-
         var selectedValue = $(this).text();
-
         $('.btn-class').text(selectedValue);
     });
 
-    // ------------------------------------------------------- Auto check:
-
+    // Event handler for cst-strategy click
     $('.cst-strategy').click(function (event) {
         event.preventDefault();
-
         var selectedValue = $(this).text();
         var isChecked = $('#autoCheck').is(':checked');
-
         $('.btn-method').text(selectedValue);
-
-        if (isChecked || selectedValue === 'Auto') {
-            $('.display-div').show();
-        } else {
-            $('.display-div').hide();
-        }
+        toggleDisplayDiv(selectedValue, isChecked);
     });
 
+    // Event handler for autoCheck change
     $('#autoCheck').change(function () {
         var selectedValue = $('.btn-method').text();
-        var isChecked = $('#autoCheck').is(':checked');
-
+        var isChecked = $(this).is(':checked');
         var enterBinsInput = $("#InputBins");
-        if (isChecked) {
-            enterBinsInput.prop("disabled", true);
-        } else {
-            enterBinsInput.prop("disabled", false);
-        }
+        enterBinsInput.prop("disabled", isChecked);
         $('.btn-method').text(selectedValue);
-
-        if (isChecked || selectedValue === 'Auto') {
-            $('.display-div').show();
-        } else {
-            $('.display-div').hide();
-        }
+        toggleDisplayDiv(selectedValue, isChecked);
     });
 
-    // ------------------------------------------------------- Auto check end.
+    // Event handlers for questionIcon mouseover and mouseout
+    $('#questionIcon').hover(
+        function () { $('#displayText').show(); },
+        function () { $('#displayText').hide(); }
+    );
 
-    var questionIcon = document.getElementById('questionIcon');
-    var textDiv = document.getElementById('displayText');
-
-    questionIcon.addEventListener('mouseover', function () {
-        textDiv.style.display = 'block';
-    });
-
-    questionIcon.addEventListener('mouseout', function () {
-        textDiv.style.display = 'none';
-    });
-
-
+    // Event handler for file-input change
     $(document).on('change', '.file-input', function () {
-        var filesCount = $(this)[0].files.length;
+        var filesCount = this.files.length;
         var textbox = $(this).prev();
 
         if (filesCount === 1) {
-            var fileName = $(this).val().split('\\').pop();
+            var fileName = this.value.split('\\').pop();
             textbox.text(fileName);
         } else {
             textbox.text('Please select only one file');
