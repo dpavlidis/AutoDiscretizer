@@ -1,6 +1,8 @@
 $(document).ready(function () {
 
 
+    $(".table-container, .checkbox-container, .method-container, .bins-container, .table-container2, .display-div").hide();
+
     // Function to show/hide the display-div
     function toggleDisplayDiv(selectedValue, isChecked) {
         if (isChecked || selectedValue === 'Auto') {
@@ -126,7 +128,8 @@ $(document).ready(function () {
             //    console.log("data from read_dataset.php?: " + response);
                 displayTable(response);
                 displayCheckboxes(response[0]);
-            //    $('#submitBtn').show();
+                updateDropdown(response[0]);
+           
 
 
             },
@@ -206,7 +209,41 @@ $(document).ready(function () {
         return checkedNames;
     }
 
+    function updateDropdown(data) {
 
+        $('.method-container').show();
+        $('.bins-container').show();
+        // Assuming data is an array of items for the dropdown
+        var dropdownMenu = $(".cst-class-dropdown");
+    
+        // Clear existing dropdown items
+        dropdownMenu.empty();
+    
+        // Iterate through the data and append new items to the dropdown
+        data.forEach(function (item, index) {
+            var listItem = $("<li>");
+            var link = $("<a>", {
+                class: "dropdown-item cst-class",
+                href: "#",
+                text: item
+            });
+    
+            // Add click event to handle item selection
+            link.click(function () {
+                // Handle item selection here if needed
+                console.log("Selected item: " + item);
+            });
+    
+            listItem.append(link);
+            dropdownMenu.append(listItem);
+        });
+
+        $('.cst-class').click(function (event) {
+            event.preventDefault();
+            var selectedValue = $(this).text();
+            $('.btn-class').text(selectedValue);
+        });
+    }
 
 
 

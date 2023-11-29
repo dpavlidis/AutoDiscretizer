@@ -123,7 +123,8 @@ body {
 
 .btn-secondary {
   margin-left: 1vw;
-  width: 6.5vw;
+  width: auto;
+  min-width: 6.5vw;
   background-color: #feffff;
   color: #0a4650;
 }
@@ -194,8 +195,11 @@ body {
   margin-right: 5vw;
 }
 
-.display-div {
-  display: none;
+.dropdown-menu {
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .dropdown-min-strategy {
@@ -270,19 +274,8 @@ body {
   width: 62vw;
 }
 
-main {
-  flex: 1;
-}
-
 footer {
   text-align: center;
   margin-top: auto;
 }
 
-.table-container, 
-.checkbox-container,
-.method-container,
-.bins-container,
-.table-container2 {
-  display: none;
-}
