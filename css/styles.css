@@ -9,6 +9,10 @@
 
 body {
   background-color: #EEEEEE;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
 }
 
 .navbar {
@@ -256,10 +260,29 @@ body {
 }
 
 .down-but {
+  display: none;
   margin-top: 1.5vh;
 }
 
 .col-lg-6 {
+  margin-top: 1vh;
   margin-left: 3.6vw;
   width: 62vw;
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  text-align: center;
+  margin-top: auto;
+}
+
+.table-container, 
+.checkbox-container,
+.method-container,
+.bins-container,
+.table-container2 {
+  display: none;
 }

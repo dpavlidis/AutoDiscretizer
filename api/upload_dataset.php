@@ -2,47 +2,71 @@
 header("Access-Control-Allow-Origin: *");
 ini_set('upload_max_filesize', '1M');
 
-function is_numeric_dataset($file_path)
-{
-    $handle = fopen($file_path, 'r');
+require '../vendor/autoload.php';
 
-    $header = fgetcsv($handle, 1000, ';');
-
-    while (($row = fgetcsv($handle, 1000, ';')) !== false) {
-        foreach ($row as $value) {
-            if (!is_numeric($value)) {
-                fclose($handle);
-                return false;
-            }
-        }
-    }
-
-    fclose($handle);
-    return true;
-}
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 if (isset($_FILES['file']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    $uploadDir = 'uploads/';
+    $uploadDir = '../datasets/';
 
     if (!file_exists($uploadDir)) {
         mkdir($uploadDir, 0777, true);
     }
 
     $originalFilename = basename($_FILES['file']['name']);
-    $uploadFile = $uploadDir . $originalFilename;
+    $uploadedFile = $uploadDir . basename($_FILES['file']['name']);
+    $fileType = strtolower(pathinfo($uploadedFile, PATHINFO_EXTENSION));
 
-    move_uploaded_file($_FILES['file']['tmp_name'], $uploadFile);
+    $allowedExtensions = ['csv', 'xlsx', 'xls'];
 
-    if (is_numeric_dataset($uploadFile)) {
-        header('Content-Type: application/json');
-        echo json_encode($originalFilename, JSON_PRETTY_PRINT);
+    if (!in_array($fileType, $allowedExtensions)) {
+        echo 'Invalid file format. Please upload a valid CSV, XLSX, or XLS file.';
+        exit;
+    }
+
+    if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadedFile)) {
+        // Check for at least one numeric column
+        $hasNumericColumn = checkForNumericColumn($uploadedFile);
+
+        if ($hasNumericColumn) {
+            header('Content-Type: application/json');
+            echo json_encode($originalFilename, JSON_PRETTY_PRINT);
+        } else {
+            // Delete the uploaded file if it doesn't meet the criteria
+            unlink($uploadedFile);
+            echo 'no numeric';
+            
+        }
     } else {
-        unlink($uploadFile);
-        header('HTTP/1.1 400 Bad Request');
-        echo 'Invalid dataset. The file must contain only numeric values.';
+        echo 'Error uploading file.';
     }
 } else {
     header('HTTP/1.1 400 Bad Request');
-    echo 'Invalid request method or no file uploaded.';
+    echo 'Invalid request method.';
+}
+
+
+function checkForNumericColumn($filePath)
+{
+    // Use PhpSpreadsheet to check for at least one numeric column
+    try {
+        $spreadsheet = IOFactory::load($filePath);
+        $sheet = $spreadsheet->getActiveSheet();
+
+        foreach ($sheet->getRowIterator() as $row) {
+            foreach ($row->getCellIterator() as $cell) {
+                $value = $cell->getValue();
+                // Check if the cell value is numeric
+                if (is_numeric($value)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    } catch (Exception $e) {
+        // Handle exceptions, e.g., if the file is not a valid spreadsheet
+        return false;
+    }
 }
 ?>
