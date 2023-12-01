@@ -11,29 +11,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
         if (file_exists($file_path)) {
             $file_extension = pathinfo($file_path, PATHINFO_EXTENSION);
-            $rowCount = 0;
             $data = array();
 
             if ($file_extension === 'csv') {
                 // Handle CSV file
                 $file = fopen($file_path, 'r');
 
-                while (($line = fgets($file)) !== false && $rowCount < 7) {
+                while (($line = fgets($file)) !== false) {
                     // Trim the line to remove any leading or trailing whitespace
                     $line = trim($line);
-                
+
                     // Check for both semicolon and comma as delimiters
                     $values = preg_split('/[;,]/', $line);
-                
+
                     // Remove double quotes from each value
-                    $cleanedValues = array_map(function($value) {
+                    $cleanedValues = array_map(function ($value) {
                         return trim($value, '"');
                     }, $values);
-                
+
                     $data[] = $cleanedValues;
-                    $rowCount++;
                 }
-                
 
                 fclose($file);
             } elseif ($file_extension === 'xlsx' || $file_extension === 'xls') {
@@ -47,11 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 foreach ($worksheet->getRowIterator() as $row) {
                     // Check for both semicolon and comma as delimiters
                     $data[] = preg_split('/[;,]/', implode('', $row->toArray()));
-                    $rowCount++;
-
-                    if ($rowCount >= 7) {
-                        break;
-                    }
                 }
             } else {
                 header('HTTP/1.1 400 Bad Request');
@@ -59,8 +51,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 exit;
             }
 
+            // Identify columns with numeric values
+            $numericColumns = array();
+            foreach ($data[0] as $index => $columnName) {
+                $isNumeric = true;
+                for ($i = 1; $i < count($data); $i++) {
+                    if (!is_numeric($data[$i][$index])) {
+                        $isNumeric = false;
+                        break;
+                    }
+                }
+                if ($isNumeric) {
+                    $numericColumns[] = $columnName;
+                }
+            }
+
+            $response = array(
+                'numericColumns' => $numericColumns,
+                'dataset' => $data  // Include the dataset in the response
+            );
+
             header('Content-Type: application/json');
-            echo json_encode($data, JSON_PRETTY_PRINT);
+            echo json_encode($response, JSON_PRETTY_PRINT);
         } else {
             header('HTTP/1.1 404 Not Found');
             echo 'Error: Dataset file not found';

@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
 
-    $(".table-container, .checkbox-container, .method-container, .bins-container, .table-container2, .display-div").hide();
+    $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-container2, .display-div").hide();
 
     // Function to show/hide the display-div
     function toggleDisplayDiv(selectedValue, isChecked) {
@@ -57,14 +57,18 @@ $(document).ready(function () {
         }
     });
 
+  
+
 //--------------------------------------------------------------------- API:
 
     $('#uploadBtn').on('click', function () {
 
         var fileInput = $('.file-input');
-        var file = $('.file-input')[0].files[0];
+        console.log(fileInput);
 
+        var file = $('.file-input')[0].files[0];
         console.log(file);
+
 
         if (!file) {
             
@@ -124,35 +128,36 @@ $(document).ready(function () {
             url: "./api/read_dataset.php?dataset=" + dataset_name,
             dataType: "json",
             success: function (response) {
-
-            //    console.log("data from read_dataset.php?: " + response);
-                displayTable(response);
-                displayCheckboxes(response[0]);
-                updateDropdown(response[0]);
-           
-
-
+                console.log(response);
+    
+                // Log the dataset and numeric columns to the console
+             //   console.log("Dataset:", response.data);
+             //   console.log("Numeric Columns:", response.numericColumns);
+    
+                // Display the table, checkboxes, and update the dropdown
+                displayTable(response.dataset);
+                displayCheckboxes(response.numericColumns);
+                updateDropdown(response.dataset[0]);
             },
             error: function (error) {
-
                 console.error("Error getting dataset content:", error);
             }
         });
     }
     
+    
+    
     function displayTable(data) {
-        $('.table-container').show();
-
+        $('.table-outer-container').show();
+    
         var tableHtml = '<table class="table table-bordered table-striped">';
-
-
+    
         tableHtml += '<thead><tr>';
         $.each(data[0], function (index, header) {
             tableHtml += '<th>' + header + '</th>';
         });
         tableHtml += '</tr></thead>';
-
-
+    
         tableHtml += '<tbody>';
         for (var i = 1; i < data.length; i++) {
             tableHtml += '<tr>';
@@ -162,10 +167,14 @@ $(document).ready(function () {
             tableHtml += '</tr>';
         }
         tableHtml += '</tbody>';
-
+    
         tableHtml += '</table>';
         $('.table-container').html(tableHtml);
     }
+    
+    
+    
+    
 
     
     function displayCheckboxes(headers) {
@@ -245,7 +254,93 @@ $(document).ready(function () {
         });
     }
 
+    
+    $('.cst-Disc').on('click', function () {
 
+        var file = $('.file-input')[0].files[0];
+        console.log("file-input: " + file.name);
+    
+        var bins = $('#InputBins').val();
+        console.log("bins: " + bins);
+    
+        var selectedStrategy = $('.btn-method').text().trim();
+        console.log("strategy: " + selectedStrategy);
+
+        /*
+
+        if (bins < 2) {
+            $('#binsHelp').text('Please add number of bins greater than or equal to 2.');
+          //  $('#spinner-border').hide();
+            $('#cst-Disc').prop('disabled', false);
+        } else {
+
+
+            if (file) {
+                var formData = new FormData();
+                var dataset_name = file.name;
+
+                checkboxNames2 = checkCheckboxStates();
+
+                console.log(checkboxNames2);
+
+                formData.append('file', file);
+                formData.append('dataset_name', dataset_name);
+                formData.append('checkboxNames2', JSON.stringify(checkboxNames2));
+                formData.append('bins', bins);
+
+                $.ajax({
+                    url: './api/naive_bayes.php',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    dataType: 'json',
+                    success: function (response) {
+
+                        console.log("data from naive_bayes.php: " + response);
+
+                        $('#spinner-border').show();
+                        $('#resultTableHead').empty();
+                        $('#resultTableBody').empty();
+
+                        Object.keys(response).forEach((key) => {
+                            $('#resultTableHead').append(`<th>${key}</th>`);
+                        });
+
+
+                        $('#resultTableBody').append('<tr>');
+                        Object.values(response).forEach((value) => {
+                            $('#resultTableBody').append(`<td>${value}</td>`);
+                        });
+                        $('#resultTableBody').append('</tr>');
+                        $('#spinner-border').hide();
+                        $('#submitBtn').prop('disabled', false);
+
+                    },
+                    error: function () {
+                        console.log("Error discretize");
+                        $('#spinner-border').hide();
+                        $('#submitBtn').prop('disabled', false);
+                    }
+                });
+            } else {
+                console.log("Error discretize: No file selected");
+                $('#message').text('Error discretize: No file selected');
+                $('#table-container').hide();
+                $('.form-check').hide();
+                $('#resultTable').hide();
+                $('.container').hide();
+                $('#spinner-border').hide();
+                $('#submitBtn').prop('disabled', false);
+            }
+        }
+    */
+
+
+
+
+
+    });
 
 
 

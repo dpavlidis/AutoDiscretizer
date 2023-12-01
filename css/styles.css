@@ -141,14 +141,37 @@ body {
 
 .table-container,
 .table-container2 {
-  width: 60vw;
-  margin-left: 20vw;
   position: relative;
-  border: 1px solid #9aa9b3;
+  padding: 5vh;
+  background-color: white;
+  max-height: 47.5vh;
+  overflow-y: auto;
+}
+
+.table-container::-webkit-scrollbar {
+  width: 12px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+.table-outer-container {
+  margin-top: 40px;
+  width: 60vw;
+  max-height: 60vh;
+  margin-left: 20vw;
+  overflow-y: auto;
+  padding-bottom: 7vh;
+  background-color: white;
   border-radius: 3px;
   transition: 0.2s;
-  padding: 50px;
-  background-color: white;
+  border: 1px solid #9aa9b3;
 }
 
 .checkbox-container {
@@ -278,4 +301,3 @@ footer {
   text-align: center;
   margin-top: auto;
 }
-

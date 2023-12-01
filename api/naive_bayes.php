@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $bins = $_POST['bins'];
     $target_dir = "uploads/";
 
-    $pythonScript = "./python/naive_bayes.py";
+    $pythonScript = "../python/naive_bayes.py";
     $output = array();
 
     $target_file = $target_dir . basename($dataset_name);

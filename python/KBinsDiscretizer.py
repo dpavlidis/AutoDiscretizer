@@ -21,7 +21,7 @@ print("\nBinned dataset:\n", pd.DataFrame(X_binned, columns=selected_columns))
 
 base_name = os.path.splitext(os.path.basename(csv_file))[0]
 
-output_folder = "lib/api/binned_datasets"
+output_folder = "../binned_datasets"
 
 os.makedirs(output_folder, exist_ok=True)
 
