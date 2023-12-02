@@ -52,7 +52,7 @@ if (!isset($data['dataset'], $data['checkedCheckboxes'], $data['strategy'], $dat
     $pythonScript = "../python/KBinsDiscretizer.py";
 
     // Adjust your command to include the parameters
-    $command = "python $pythonScript $target_file $strategy $bins " . implode(' ', $columns) . " 2>&1";
+    $command = "python $pythonScript " . escapeshellarg($target_file) . " " . escapeshellarg($strategy) . " " . escapeshellarg($bins) . " " . implode(' ', array_map('escapeshellarg', $columns)) . " 2>&1";
     exec($command, $output, $return_var);
 
     // Check if the command was successful

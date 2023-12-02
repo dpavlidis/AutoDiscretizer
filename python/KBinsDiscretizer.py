@@ -8,8 +8,13 @@ strategy = sys.argv[2]
 bins = int(sys.argv[3])
 selected_columns = sys.argv[4:]
 
-# Read the CSV file with a custom separator (",") and quote character (")
-data = pd.read_csv(csv_file, sep=",", quotechar='"')
+# Read the CSV file with semicolon as the default separator
+data = pd.read_csv(csv_file, sep=";", quotechar='"')
+
+# Check if the DataFrame has more than one column
+if len(data.columns) == 1:
+    # If only one column is present, try reading with a comma separator
+    data = pd.read_csv(csv_file, sep=",", quotechar='"')
 
 selected_columns = list(map(str.strip, selected_columns))
 
@@ -26,7 +31,7 @@ print("\nBinned dataset:\n", pd.DataFrame(X_binned, columns=selected_columns))
 
 base_name = os.path.splitext(os.path.basename(csv_file))[0]
 
-output_folder = "./binned_datasets"
+output_folder = "../binned_datasets"
 
 os.makedirs(output_folder, exist_ok=True)
 
