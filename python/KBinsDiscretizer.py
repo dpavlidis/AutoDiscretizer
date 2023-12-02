@@ -26,8 +26,10 @@ X = data.loc[:, selected_columns]
 kbins = KBinsDiscretizer(n_bins=bins, encode='ordinal', strategy=strategy)
 X_binned = kbins.fit_transform(X)
 
-print("Original dataset:\n", data)
-print("\nBinned dataset:\n", pd.DataFrame(X_binned, columns=selected_columns))
+# Replace the original columns with the binned columns in the same positions
+data[selected_columns] = X_binned
+
+print("Binned dataset:\n", data)
 
 base_name = os.path.splitext(os.path.basename(csv_file))[0]
 
@@ -37,9 +39,7 @@ os.makedirs(output_folder, exist_ok=True)
 
 output_file = os.path.join(output_folder, f"{base_name}.csv") 
 
-binned_df = pd.DataFrame(X_binned, columns=selected_columns)
-
-binned_df.to_csv(output_file, index=False)
+data.to_csv(output_file, index=False)
 
 # Print a success message
 print("Success: Binned dataset saved to", output_file)
