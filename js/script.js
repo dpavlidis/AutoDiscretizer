@@ -286,8 +286,8 @@ $(document).ready(function () {
         var bins = $('#InputBins').val();
         console.log("bins: " + bins);
     
-        var selectedStrategy = $('.btn-method').text().trim();
-        console.log("strategy: " + selectedStrategy);
+        var strategy = $('.btn-method').text().trim();
+        console.log("strategy: " + strategy);
 
         var target_class = $('.btn-class').text().trim();
         console.log("class: " + target_class);
@@ -307,7 +307,7 @@ $(document).ready(function () {
             alert("Please check columns for discretization!");
         }
 
-        if (!selectedStrategy || selectedStrategy === 'Method') {
+        if (!strategy || strategy === 'Method') {
             isValid = false;
             alert("Please select a strategy!");
         }
@@ -325,10 +325,54 @@ $(document).ready(function () {
         */
     
 
-        // Perform the final check
+       
         if (isValid) {
-            // Proceed with your logic
             console.log("All checks passed. Proceeding with further actions.");
+
+          //  $('#spinner-border').hide();
+            $('.cst-Disc').prop('disabled', false);
+
+            var dataset = file.name;
+            console.log(dataset);
+
+            $.ajax({
+                url: './api/KBinsDiscretizer.php',
+                type: 'POST',
+                data: JSON.stringify({
+                    dataset: dataset,
+                    checkedCheckboxes: checkedCheckboxes,
+                    strategy: strategy,
+                    bins: bins,
+                 // target_clas: target_clas, // uncomment this line if needed
+                }),
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (response) {
+
+                    console.log("data from KBinsDiscretizer.php: " + response);
+                    //   $('#spinner-border').show();
+
+
+
+
+
+
+
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("Error during discretize:", textStatus, errorThrown);
+                    // Uncomment the following line if you want to hide a spinner in case of an error
+                    // $('#spinner-border').hide();
+                    $('.cst-Disc').prop('disabled', false);
+                }
+            });
+
+
+
+
+
+
         } else {
             console.log("Some checks failed. Please address the issues.");
         }
