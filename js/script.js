@@ -64,7 +64,6 @@ $(document).ready(function () {
     $('#uploadBtn').on('click', function () {
 
         var fileInput = $('.file-input');
-        console.log(fileInput);
 
         var file = $('.file-input')[0].files[0];
         console.log(file);
@@ -97,7 +96,7 @@ $(document).ready(function () {
                 contentType: false,
                 processData: false,
                 success: function (response) {
-                    console.log("data from upload_dataset.php: " + response);
+                    console.log("data response from upload_dataset.php: " + response);
 
                     getDatasetContent(response);
                  //   $('#uploadBtn').prop('disabled', true);
@@ -122,7 +121,7 @@ $(document).ready(function () {
     var checkboxNames = [];
 
     function getDatasetContent(dataset_name) {
-        console.log(dataset_name);
+        console.log("dataset name : " + dataset_name);
         $.ajax({
             type: "GET",
             url: "./api/read_dataset.php?dataset=" + dataset_name,
@@ -193,16 +192,38 @@ $(document).ready(function () {
 
         $('.checkbox-container').html(checkboxHtml);
 
+      
 
+
+        /*
         $('.form-check-input').on('change', function () {
             var columnIndex = $(this).attr('id').split('_')[1];
             toggleColumn(columnIndex);
-        });
+        });  */
     }
 
+    /*
     function toggleColumn(columnIndex) {
         $('#previewTable td:nth-child(' + (parseInt(columnIndex) + 1) + '), #previewTable th:nth-child(' + (parseInt(columnIndex) + 1) + ')').toggle();
     }
+    */
+
+
+
+    function getCheckedCheckboxes() {
+        var checkedCheckboxes = [];
+        
+        $('.checkbox-container input[type="checkbox"]:checked').each(function () {
+            var checkboxId = $(this).attr('id');
+            var checkboxIndex = checkboxId.split('_')[1]; // Extract index from checkbox ID
+            var checkboxName = checkboxNames[checkboxIndex];
+            checkedCheckboxes.push(checkboxName);
+        });
+    
+        return checkedCheckboxes;
+    }
+
+    
 
     function getCheckboxNames() {
         return checkboxNames.filter(function (name, index) {
@@ -237,11 +258,13 @@ $(document).ready(function () {
                 text: item
             });
     
+            /*
             // Add click event to handle item selection
             link.click(function () {
                 // Handle item selection here if needed
                 console.log("Selected item: " + item);
             });
+            */
     
             listItem.append(link);
             dropdownMenu.append(listItem);
@@ -265,6 +288,62 @@ $(document).ready(function () {
     
         var selectedStrategy = $('.btn-method').text().trim();
         console.log("strategy: " + selectedStrategy);
+
+        var target_class = $('.btn-class').text().trim();
+        console.log("class: " + target_class);
+
+        var checkedCheckboxes = getCheckedCheckboxes();
+        console.log(checkedCheckboxes);
+
+        var isValid = true; // Assume everything is valid initially
+
+        if (!file) {
+            isValid = false;
+            alert("Please select a file!");
+        }
+
+        if (checkedCheckboxes.length === 0) {
+            isValid = false;
+            alert("Please check columns for discretization!");
+        }
+
+        if (!selectedStrategy || selectedStrategy === 'Method') {
+            isValid = false;
+            alert("Please select a strategy!");
+        }
+
+        if (!bins || bins < 2 || bins > 20) {
+            isValid = false;
+            alert("Please enter a value for bins between 2-20!");
+        }
+
+        /* after this ----
+        if (!target_class) {
+            isValid = false;
+            alert("Please select a target class!");
+        }
+        */
+    
+
+        // Perform the final check
+        if (isValid) {
+            // Proceed with your logic
+            console.log("All checks passed. Proceeding with further actions.");
+        } else {
+            console.log("Some checks failed. Please address the issues.");
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
         /*
 
