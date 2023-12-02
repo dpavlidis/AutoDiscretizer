@@ -318,7 +318,7 @@ $(document).ready(function () {
         }
 
         /* after this ----
-        if (!target_class) {
+        if (!target_class || target_clas === 'Class') {
             isValid = false;
             alert("Please select a target class!");
         }
