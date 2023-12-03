@@ -3,9 +3,20 @@ header("Access-Control-Allow-Origin: *");
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
-    if (isset($_GET['dataset'])) {
-        $dataset_path = '../datasets/';
+    if (isset($_GET['dataset']) && isset($_GET['binned'])) {
+  
         $originalFilename = $_GET['dataset'];
+        $binned = $_GET['binned'];
+
+        if ($binned === 'false') {
+            $dataset_path = '../datasets/';
+        } elseif ($binned === 'true') {
+            $dataset_path = '../binned_datasets/';
+        } else {
+            header('HTTP/1.1 400 Bad Request');
+            echo 'Error: Unsupported binned value';
+            exit;
+        }
 
         $file_path = $dataset_path . $originalFilename;
 
