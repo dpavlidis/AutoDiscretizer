@@ -97,15 +97,17 @@ $(document).ready(function () {
                 processData: false,
                 success: function (response) {
                     console.log("data response from upload_dataset.php: " + response);
-                    var flag = false;
-                    getDatasetContent(response, flag);
-                    //   $('#uploadBtn').prop('disabled', true);
 
                     if (response === 'no numeric') {
                         $(".file-message").text("The file must contain at least one numeric column.");
                         fileInput.prop('disabled', false);
                         //       $('#uploadBtn').prop('disabled', false);
+                        return;
                     }
+                    
+                    var flag = false;
+                    getDatasetContent(response, flag);
+                    //   $('#uploadBtn').prop('disabled', true);
 
                 },
                 error: function () {
