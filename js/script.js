@@ -363,10 +363,12 @@ $(document).ready(function () {
             alert("Please enter a value for bins between 2-20!");
         }
 
-        if (!target_class || target_class === 'Pick one') {
-            isValid = false;
-            alert("Please select a target class!");
-        }
+        if ($('.display-div').is(':visible')) {
+            if (!target_class || target_class === 'Pick Class') {
+              isValid = false;
+              alert("Please select a target class!");
+            }
+          }
         
 
 

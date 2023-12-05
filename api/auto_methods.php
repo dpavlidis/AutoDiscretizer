@@ -50,7 +50,7 @@ if (!isset($data['dataset'], $data['checkedCheckboxes'], $data['strategy'], $dat
 
     if ($strategy === 'auto' && $autoCheck) {
         $pythonScript = "../python/auto_all.py";
-        $command = "python $pythonScript " . escapeshellarg($target_file) . " " . escapeshellarg($strategy) . " " . escapeshellarg($bins) . " " . implode(' ', array_map('escapeshellarg', $columns)) . " 2>&1";
+        $command = "python $pythonScript " . escapeshellarg($target_file) . " " . escapeshellarg($target_class) . " " . implode(' ', array_map('escapeshellarg', $columns)) . " 2>&1";
        exec($command, $output, $return_var);
 
     }elseif ($strategy === 'auto' && !$autoCheck) {
