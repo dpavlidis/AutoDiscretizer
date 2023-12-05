@@ -10,11 +10,11 @@ $(document).ready(function () {
     currentPath = currentPath.slice(1);
 
     // Add the active class to the corresponding nav link
-    $('.navbar-nav a').each(function() {
-      var linkPath = $(this).attr('href');
-      if (linkPath === currentPath) {
-        $(this).addClass('active');
-      }
+    $('.navbar-nav a').each(function () {
+        var linkPath = $(this).attr('href');
+        if (linkPath === currentPath) {
+            $(this).addClass('active');
+        }
     });
 
     // Function to show/hide the display-div
@@ -118,7 +118,7 @@ $(document).ready(function () {
                         //       $('#uploadBtn').prop('disabled', false);
                         return;
                     }
-                    
+
                     var flag = false;
                     getDatasetContent(response, flag);
                     //   $('#uploadBtn').prop('disabled', true);
@@ -365,15 +365,15 @@ $(document).ready(function () {
 
         if ($('.display-div').is(':visible')) {
             if (!target_class || target_class === 'Pick Class') {
-              isValid = false;
-              alert("Please select a target class!");
+                isValid = false;
+                alert("Please select a target class!");
             }
-          }
-        
+        }
 
 
 
-        if (isValid && autoCheck === false && strategy!= 'Auto') {
+
+        if (isValid && autoCheck === false && strategy != 'Auto') {
             console.log("All checks passed. Proceeding with further actions.");
 
             //  $('#spinner-border').hide();
@@ -455,9 +455,9 @@ $(document).ready(function () {
 
 
         }
-        
-        
-        
+
+
+
         else {
             console.log("Some checks failed. Please address the issues.");
         }
@@ -476,7 +476,7 @@ $(document).ready(function () {
 
         var link = document.createElement('a');
         link.href = './api/download_dataset.php?dataset=' + encodeURIComponent(dataset);
-       // link.target = '_blank'; // Open in a new tab/window
+        // link.target = '_blank'; // Open in a new tab/window
 
         // Trigger a click on the anchor element
         link.click();
