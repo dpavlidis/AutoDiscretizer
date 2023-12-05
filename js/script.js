@@ -3,6 +3,20 @@ $(document).ready(function () {
 
     $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .display-div").hide();
 
+
+    var currentPath = window.location.pathname;
+
+    // Remove the leading slash
+    currentPath = currentPath.slice(1);
+
+    // Add the active class to the corresponding nav link
+    $('.navbar-nav a').each(function() {
+      var linkPath = $(this).attr('href');
+      if (linkPath === currentPath) {
+        $(this).addClass('active');
+      }
+    });
+
     // Function to show/hide the display-div
     function toggleDisplayDiv(selectedValue, isChecked) {
         if (isChecked || selectedValue === 'Auto') {
@@ -316,6 +330,17 @@ $(document).ready(function () {
         var checkedCheckboxes = getCheckedCheckboxes();
         console.log(checkedCheckboxes);
 
+        var checkBox = $("#autoCheck");
+        var autoCheck = false;
+
+        if (checkBox.prop("checked")) {
+            console.log("Checkbox is checked");
+            autoCheck = true;
+        } else {
+            console.log("Checkbox is not checked");
+            autoCheck = false;
+        }
+
         var isValid = true; // Assume everything is valid initially
 
         if (!file) {
@@ -333,21 +358,20 @@ $(document).ready(function () {
             alert("Please select a strategy!");
         }
 
-        if (!bins || bins < 2 || bins > 20) {
+        if ((!bins || bins < 2 || bins > 20) && autoCheck === false) {
             isValid = false;
             alert("Please enter a value for bins between 2-20!");
         }
 
-        /* after this ----
-        if (!target_class || target_clas === 'Class') {
+        if (!target_class || target_class === 'Pick one') {
             isValid = false;
             alert("Please select a target class!");
         }
-        */
+        
 
 
 
-        if (isValid) {
+        if (isValid && autoCheck === false && strategy!= 'Auto') {
             console.log("All checks passed. Proceeding with further actions.");
 
             //  $('#spinner-border').hide();
@@ -387,7 +411,52 @@ $(document).ready(function () {
 
 
 
-        } else {
+        } else if (isValid && (autoCheck === true || strategy === 'Auto')) {
+            console.log("All checks passed. Proceeding with further actions.");
+
+            //  $('#spinner-border').hide();
+            $('.cst-Disc').prop('disabled', false);
+
+            var dataset = file.name;
+            console.log(dataset);
+
+            $.ajax({
+                url: './api/auto_methods.php',
+                type: 'POST',
+                data: JSON.stringify({
+                    dataset: dataset,
+                    checkedCheckboxes: checkedCheckboxes,
+                    strategy: strategy,
+                    bins: bins,
+                    target_class: target_class,
+                    autoCheck: autoCheck,
+                }),
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (response) {
+
+                    console.log("data from auto_bins.php: " + response);
+                    //   $('#spinner-border').show();
+                    var flag = true;
+                    getDatasetContent(dataset, flag);
+
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("Error during discretize:", textStatus, errorThrown);
+                    // Uncomment the following line if you want to hide a spinner in case of an error
+                    // $('#spinner-border').hide();
+                    $('.cst-Disc').prop('disabled', false);
+                }
+            });
+
+
+
+        }
+        
+        
+        
+        else {
             console.log("Some checks failed. Please address the issues.");
         }
 

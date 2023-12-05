@@ -7,8 +7,9 @@ import sys
 import os
 
 csv_file = sys.argv[1]
-selected_columns = sys.argv[2:]  # these are the column names to do KBinsDiscretizer
-target_class = 'Class'
+strategy = sys.argv[2]
+target_class = sys.argv[3]
+selected_columns = sys.argv[4:]  # these are the column names to do KBinsDiscretizer
 
 # Read the CSV file with semicolon as the default separator
 data = pd.read_csv(csv_file, sep=";", quotechar='"')
@@ -37,7 +38,7 @@ best_binned_dataset = None
 
 # Loop through different bin numbers
 for n_bins in range(2, 21):
-    kbins = KBinsDiscretizer(n_bins=n_bins, encode='ordinal', strategy='uniform', subsample=1000)
+    kbins = KBinsDiscretizer(n_bins=n_bins, encode='ordinal', strategy=strategy, subsample=1000)
     X_binned = kbins.fit_transform(X)
 
     # Replace the original columns with the best-binned columns in the same positions
@@ -82,7 +83,7 @@ print("data :\n", data)
 
 base_name = os.path.splitext(os.path.basename(csv_file))[0]
 
-output_folder = "./binned_datasets"
+output_folder = "../binned_datasets"
 os.makedirs(output_folder, exist_ok=True)
 
 output_file = os.path.join(output_folder, f"{base_name}.csv")
