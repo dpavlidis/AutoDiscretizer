@@ -168,7 +168,7 @@ $(document).ready(function () {
             tableHtml += '</tr></thead>';
 
             tableHtml += '<tbody>';
-            for (var i = 1; i < 10; i++) {
+            for (var i = 1; i < 30; i++) {
                 tableHtml += '<tr>';
                 $.each(data[i], function (index, cell) {
                     tableHtml += '<td class="py-2">' + cell + '</td>';
@@ -192,7 +192,7 @@ $(document).ready(function () {
             tableHtml += '</tr></thead>';
 
             tableHtml += '<tbody>';
-            for (var i = 1; i < 10; i++) {
+            for (var i = 1; i < 30; i++) {
                 tableHtml += '<tr>';
                 $.each(data[i], function (index, cell) {
                     tableHtml += '<td class="py-2">' + cell + '</td>';
