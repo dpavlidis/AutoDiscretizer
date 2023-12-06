@@ -61,10 +61,14 @@ $(document).ready(function () {
         }
     });
 
-    $('.file-input').on('change', function() {
-        // Hide the div when a file is selected
+    $('.file-input').on('change', function () {
         $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .display-div, .down-but").hide();
-      });
+    });
+
+    $('.navbar-nav a').on('click', function () {
+        $('.navbar-nav a').removeClass('active');
+        $(this).addClass('active');
+    });
 
     //--------------------------------------------------------------------- API:
 
@@ -93,7 +97,7 @@ $(document).ready(function () {
 
         if (file) {
 
-           // fileInput.prop('disabled', true);
+            // fileInput.prop('disabled', true);
             var formData = new FormData();
             formData.append('file', file);
 
