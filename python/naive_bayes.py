@@ -14,7 +14,6 @@ selected_columns = list(map(str.strip, selected_columns))
 data = pd.read_csv(csv_file, sep=";")
 
 X = data.loc[:, selected_columns]
-# y = data['quality']  # Target
 y = data.iloc[:, -1]
 
 X_train, X_test, y_train, y_test = train_test_split(

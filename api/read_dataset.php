@@ -25,17 +25,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $data = array();
 
             if ($file_extension === 'csv') {
-                // Handle CSV file
                 $file = fopen($file_path, 'r');
 
                 while (($line = fgets($file)) !== false) {
-                    // Trim the line to remove any leading or trailing whitespace
                     $line = trim($line);
 
-                    // Check for both semicolon and comma as delimiters
                     $values = preg_split('/[;,]/', $line);
 
-                    // Remove double quotes from each value
                     $cleanedValues = array_map(function ($value) {
                         return trim($value, '"');
                     }, $values);
@@ -45,15 +41,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
                 fclose($file);
             } elseif ($file_extension === 'xlsx' || $file_extension === 'xls') {
-                // Handle Excel file
-                require 'vendor/autoload.php'; // Include PhpSpreadsheet library
+                require 'vendor/autoload.php'; 
 
                 $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReaderForFile($file_path);
                 $spreadsheet = $reader->load($file_path);
                 $worksheet = $spreadsheet->getActiveSheet();
 
                 foreach ($worksheet->getRowIterator() as $row) {
-                    // Check for both semicolon and comma as delimiters
                     $data[] = preg_split('/[;,]/', implode('', $row->toArray()));
                 }
             } else {
@@ -62,7 +56,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 exit;
             }
 
-            // Identify columns with numeric values
             $numericColumns = array();
             foreach ($data[0] as $index => $columnName) {
                 $isNumeric = true;
@@ -79,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
             $response = array(
                 'numericColumns' => $numericColumns,
-                'dataset' => $data  // Include the dataset in the response
+                'dataset' => $data 
             );
 
             header('Content-Type: application/json');

@@ -1,15 +1,11 @@
 $(document).ready(function () {
 
-
     $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .display-div").hide();
-
 
     var currentPath = window.location.pathname;
 
-    // Remove the leading slash
     currentPath = currentPath.slice(1);
 
-    // Add the active class to the corresponding nav link
     $('.navbar-nav a').each(function () {
         var linkPath = $(this).attr('href');
         if (linkPath === currentPath) {
@@ -17,7 +13,6 @@ $(document).ready(function () {
         }
     });
 
-    // Function to show/hide the display-div
     function toggleDisplayDiv(selectedValue, isChecked) {
         if (isChecked || selectedValue === 'Auto') {
             $('.display-div').show();
@@ -26,14 +21,12 @@ $(document).ready(function () {
         }
     }
 
-    // Event handler for cst-class click
     $('.cst-class').click(function (event) {
         event.preventDefault();
         var selectedValue = $(this).text();
         $('.btn-class').text(selectedValue);
     });
 
-    // Event handler for cst-strategy click
     $('.cst-strategy').click(function (event) {
         event.preventDefault();
         var selectedValue = $(this).text();
@@ -42,7 +35,6 @@ $(document).ready(function () {
         toggleDisplayDiv(selectedValue, isChecked);
     });
 
-    // Event handler for autoCheck change
     $('#autoCheck').change(function () {
         var selectedValue = $('.btn-method').text();
         var isChecked = $(this).is(':checked');
@@ -52,13 +44,11 @@ $(document).ready(function () {
         toggleDisplayDiv(selectedValue, isChecked);
     });
 
-    // Event handlers for questionIcon mouseover and mouseout
     $('#questionIcon').hover(
         function () { $('#displayText').show(); },
         function () { $('#displayText').hide(); }
     );
 
-    // Event handler for file-input change
     $(document).on('change', '.file-input', function () {
         var filesCount = this.files.length;
         var textbox = $(this).prev();
@@ -70,8 +60,6 @@ $(document).ready(function () {
             textbox.text('Please select only one file');
         }
     });
-
-
 
     //--------------------------------------------------------------------- API:
 
@@ -96,7 +84,6 @@ $(document).ready(function () {
 
             return;
         }
-
 
         if (file) {
             fileInput.prop('disabled', true);
@@ -144,12 +131,9 @@ $(document).ready(function () {
             dataType: "json",
             success: function (response) {
                 console.log(response);
-
-                // Log the dataset and numeric columns to the console
                 //   console.log("Dataset:", response.data);
                 //   console.log("Numeric Columns:", response.numericColumns);
 
-                // Display the table, checkboxes, and update the dropdown
                 if (flag === false) {
                     displayTable(response.dataset, flag);
                     displayCheckboxes(response.numericColumns);
@@ -250,7 +234,7 @@ $(document).ready(function () {
 
         $('.checkbox-container input[type="checkbox"]:checked').each(function () {
             var checkboxId = $(this).attr('id');
-            var checkboxIndex = checkboxId.split('_')[1]; // Extract index from checkbox ID
+            var checkboxIndex = checkboxId.split('_')[1];
             var checkboxName = checkboxNames[checkboxIndex];
             checkedCheckboxes.push(checkboxName);
         });
@@ -278,13 +262,10 @@ $(document).ready(function () {
 
         $('.method-container').show();
         $('.bins-container').show();
-        // Assuming data is an array of items for the dropdown
         var dropdownMenu = $(".cst-class-dropdown");
 
-        // Clear existing dropdown items
         dropdownMenu.empty();
 
-        // Iterate through the data and append new items to the dropdown
         data.forEach(function (item, index) {
             var listItem = $("<li>");
             var link = $("<a>", {
@@ -292,14 +273,6 @@ $(document).ready(function () {
                 href: "#",
                 text: item
             });
-
-            /*
-            // Add click event to handle item selection
-            link.click(function () {
-                // Handle item selection here if needed
-                console.log("Selected item: " + item);
-            });
-            */
 
             listItem.append(link);
             dropdownMenu.append(listItem);
@@ -341,7 +314,7 @@ $(document).ready(function () {
             autoCheck = false;
         }
 
-        var isValid = true; // Assume everything is valid initially
+        var isValid = true;
 
         if (!file) {
             isValid = false;
@@ -371,12 +344,9 @@ $(document).ready(function () {
         }
 
 
-
-
         if (isValid && autoCheck === false && strategy != 'Auto') {
             console.log("All checks passed. Proceeding with further actions.");
 
-            //  $('#spinner-border').hide();
             $('.cst-Disc').prop('disabled', false);
 
             var dataset = file.name;
@@ -390,7 +360,7 @@ $(document).ready(function () {
                     checkedCheckboxes: checkedCheckboxes,
                     strategy: strategy,
                     bins: bins,
-                    // target_clas: target_clas, // uncomment this line if needed
+                    // target_clas: target_clas, 
                 }),
                 contentType: 'application/json',
                 dataType: 'json',
@@ -405,7 +375,6 @@ $(document).ready(function () {
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.log("Error during discretize:", textStatus, errorThrown);
-                    // Uncomment the following line if you want to hide a spinner in case of an error
                     // $('#spinner-border').hide();
                     $('.cst-Disc').prop('disabled', false);
                 }
@@ -446,27 +415,18 @@ $(document).ready(function () {
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.log("Error during discretize:", textStatus, errorThrown);
-                    // Uncomment the following line if you want to hide a spinner in case of an error
                     // $('#spinner-border').hide();
                     $('.cst-Disc').prop('disabled', false);
                 }
             });
 
-
-
         }
-
-
 
         else {
             console.log("Some checks failed. Please address the issues.");
         }
 
-
-
-
     });
-
 
 
     $('.down-but').on('click', function () {
@@ -476,14 +436,10 @@ $(document).ready(function () {
 
         var link = document.createElement('a');
         link.href = './api/download_dataset.php?dataset=' + encodeURIComponent(dataset);
-        // link.target = '_blank'; // Open in a new tab/window
 
-        // Trigger a click on the anchor element
         link.click();
 
-
     });
-
 
 
 

@@ -25,14 +25,12 @@ if (isset($_FILES['file']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadedFile)) {
-        // Check for at least one numeric column
         $hasNumericColumn = checkForNumericColumn($uploadedFile);
 
         if ($hasNumericColumn) {
             header('Content-Type: application/json');
             echo json_encode($originalFilename, JSON_PRETTY_PRINT);
         } else {
-            // Delete the uploaded file if it doesn't meet the criteria
             unlink($uploadedFile);
             echo 'no numeric';
             
@@ -48,7 +46,6 @@ if (isset($_FILES['file']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
 function checkForNumericColumn($filePath)
 {
-    // Use PhpSpreadsheet to check for at least one numeric column
     try {
         $spreadsheet = IOFactory::load($filePath);
         $sheet = $spreadsheet->getActiveSheet();
@@ -56,7 +53,6 @@ function checkForNumericColumn($filePath)
         foreach ($sheet->getRowIterator() as $row) {
             foreach ($row->getCellIterator() as $cell) {
                 $value = $cell->getValue();
-                // Check if the cell value is numeric
                 if (is_numeric($value)) {
                     return true;
                 }
@@ -65,7 +61,6 @@ function checkForNumericColumn($filePath)
 
         return false;
     } catch (Exception $e) {
-        // Handle exceptions, e.g., if the file is not a valid spreadsheet
         return false;
     }
 }
