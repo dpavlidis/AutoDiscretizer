@@ -168,10 +168,10 @@ body {
 .table-outer-container2 {
   margin-top: 40px;
   width: 60vw;
-  max-height: 60vh;
+  max-height: 65vh;
   margin-left: 20vw;
   overflow-y: auto;
-  padding-bottom: 7vh;
+  padding-bottom: 3vh;
   background-color: white;
   border-radius: 3px;
   transition: 0.2s;
@@ -290,6 +290,10 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.fa-cloud-arrow-up {
+  margin-right: 1px;
+}
+
 .down-but {
   margin-top: 1.5vh;
 }
@@ -307,4 +311,14 @@ footer {
 
 .table {
   text-align: center;
+}
+
+.table-text {
+  margin-left: 5vh;
+  margin-top: 4vh;
+  margin-right: 4vh;
+}
+
+.fa-circle-cst{
+  margin-right: 4px;
 }
