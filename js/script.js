@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .display-div").hide();
+    $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .display-div, .down-but").hide();
 
     var currentPath = window.location.pathname;
 
@@ -61,6 +61,11 @@ $(document).ready(function () {
         }
     });
 
+    $('.file-input').on('change', function() {
+        // Hide the div when a file is selected
+        $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .display-div, .down-but").hide();
+      });
+
     //--------------------------------------------------------------------- API:
 
     $('#uploadBtn').on('click', function () {
@@ -74,6 +79,7 @@ $(document).ready(function () {
         if (!file) {
 
             $(".file-message").text("Please upload a dataset.");
+            $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .display-div, .down-but").hide();
             return;
         }
 
@@ -86,7 +92,8 @@ $(document).ready(function () {
         }
 
         if (file) {
-            fileInput.prop('disabled', true);
+
+           // fileInput.prop('disabled', true);
             var formData = new FormData();
             formData.append('file', file);
 
