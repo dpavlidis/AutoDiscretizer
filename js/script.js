@@ -177,7 +177,6 @@ $(document).ready(function () {
     }
 
 
-
     function displayTable(data, flag) {
 
         if (flag === false) {

@@ -108,7 +108,7 @@ body {
 
 .btn-primary {
   margin-top: 2vh;
-  margin-left: 45vw;
+  margin-left: 46.5vw;
   width: 6.5vw;
   background-color: #feffff;
   color: #0a4650;
@@ -147,21 +147,25 @@ body {
 .table-container2 {
   position: relative;
   padding: 5vh;
+  padding-top: 0;
   background-color: white;
   max-height: 47.5vh;
   overflow-y: auto;
 }
 
-.table-container::-webkit-scrollbar {
+.table-container::-webkit-scrollbar,
+.table-container2::-webkit-scrollbar {
   width: 12px;
 }
 
-.table-container::-webkit-scrollbar-thumb {
+.table-container::-webkit-scrollbar-thumb,
+.table-container2::-webkit-scrollbar-thumb {
   background-color: #888;
   border-radius: 8px;
 }
 
-.table-container::-webkit-scrollbar-track {
+.table-container::-webkit-scrollbar-track,
+.table-container2::-webkit-scrollbar-track {
   background-color: #f1f1f1;
 }
 
@@ -169,7 +173,7 @@ body {
 .table-outer-container2 {
   margin-top: 2vh;
   width: 60vw;
-  max-height: 65vh;
+  max-height: 70vh;
   margin-left: 20vw;
   overflow-y: auto;
   padding-bottom: 3vh;
@@ -178,6 +182,21 @@ body {
   transition: 0.2s;
   border: 1px solid #9aa9b3;
 }
+
+.table-outer-container3 {
+  margin-top: 2vh;
+  padding: 60px;
+  width: 60vw;
+  max-height: 65vh;
+  margin-left: 20vw;
+  overflow-y: auto;
+  background-color: white;
+  border-radius: 3px;
+  transition: 0.2s;
+  border: 1px solid #9aa9b3;
+}
+
+
 
 .checkbox-container {
   margin-left: 20vw;
@@ -336,5 +355,15 @@ footer {
     cursor: not-allowed;
     background-color: #feffff;
     color: #0a4650;
+}
+
+.table-text-ori {
+
+  margin-top: 4vh;
+  text-align: center;
+}
+
+h4 {
+  text-decoration: underline;
 }
 
