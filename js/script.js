@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .display-div, .down-but").hide();
+    $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .display-div, .down-but, .spinner-cst1").hide();
 
     var currentPath = window.location.pathname;
 
@@ -62,7 +62,7 @@ $(document).ready(function () {
     });
 
     $('.file-input').on('change', function () {
-        $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .display-div, .down-but").hide();
+        $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .display-div, .down-but, .spinner-cst1").hide();
     });
 
     $('.navbar-nav a').on('click', function () {
@@ -74,6 +74,9 @@ $(document).ready(function () {
 
     $('#uploadBtn').on('click', function () {
 
+        $('.spinner-cst1').show();
+
+
         var fileInput = $('.file-input');
 
         var file = $('.file-input')[0].files[0];
@@ -83,7 +86,7 @@ $(document).ready(function () {
         if (!file) {
 
             $(".file-message").text("Please upload a dataset.");
-            $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .display-div, .down-but").hide();
+            $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .display-div, .down-but, .spinner-cst1").hide();
             return;
         }
 
@@ -91,12 +94,14 @@ $(document).ready(function () {
 
         if ($.inArray(fileType, ['csv', 'xlsx', 'xls']) === -1) {
             $(".file-message").text("Please upload a valid CSV, XLSX, or XLS file.");
-
+            $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .display-div, .down-but, .spinner-cst1").hide();
             return;
         }
 
         if (file) {
 
+         //   $('#uploadBtn').prop('disabled', true);
+            $('#uploadBtn').addClass('disabled');
             // fileInput.prop('disabled', true);
             var formData = new FormData();
             formData.append('file', file);
@@ -112,22 +117,30 @@ $(document).ready(function () {
 
                     if (response === 'no numeric') {
                         $(".file-message").text("The file must contain at least one numeric column.");
-                        fileInput.prop('disabled', false);
+                        $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .display-div, .down-but, .spinner-cst1").hide();
+                        $('#uploadBtn').prop('disabled', false);
+                   //     fileInput.prop('disabled', false);
                         //       $('#uploadBtn').prop('disabled', false);
                         return;
                     }
 
                     var flag = false;
                     getDatasetContent(response, flag);
-                    //   $('#uploadBtn').prop('disabled', true);
+                    $('#uploadBtn').removeClass('disabled')
+                    $('.table-outer-container2').hide();
+                    $('.down-but').hide();
+                  
 
                 },
                 error: function () {
+                    $('.spinner-cst1').hide();
+                    $('#uploadBtn').prop('disabled', false);
                     $('#table-container').text('Error uploading file.');
                 }
             });
         } else {
-
+            $('.spinner-cst1').hide();
+            $('#uploadBtn').prop('disabled', false);
             $('.file-message').text('Please select a file.');
         }
     });
@@ -154,8 +167,10 @@ $(document).ready(function () {
                 } else {
                     console.log("error flag");
                 }
+                $('.spinner-cst1').hide();
             },
             error: function (error) {
+                $('.spinner-cst1').hide();
                 console.error("Error getting dataset content:", error);
             }
         });
@@ -177,7 +192,7 @@ $(document).ready(function () {
             tableHtml += '</tr></thead>';
 
             tableHtml += '<tbody>';
-            for (var i = 1; i < 30; i++) {
+            for (var i = 1; i < 20; i++) {
                 tableHtml += '<tr>';
                 $.each(data[i], function (index, cell) {
                     tableHtml += '<td class="py-2">' + cell + '</td>';
@@ -201,7 +216,7 @@ $(document).ready(function () {
             tableHtml += '</tr></thead>';
 
             tableHtml += '<tbody>';
-            for (var i = 1; i < 30; i++) {
+            for (var i = 1; i < 20; i++) {
                 tableHtml += '<tr>';
                 $.each(data[i], function (index, cell) {
                     tableHtml += '<td class="py-2">' + cell + '</td>';
@@ -357,6 +372,7 @@ $(document).ready(function () {
 
         if (isValid && autoCheck === false && strategy != 'Auto') {
             console.log("All checks passed. Proceeding with further actions.");
+            $('.spinner-cst2').show();
 
             $('.cst-Disc').prop('disabled', false);
 
@@ -381,10 +397,12 @@ $(document).ready(function () {
                     //   $('#spinner-border').show();
                     var flag = true;
                     getDatasetContent(dataset, flag);
+                    $('.spinner-cst2').hide();
 
 
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
+                    $('.spinner-cst2').hide();
                     console.log("Error during discretize:", textStatus, errorThrown);
                     // $('#spinner-border').hide();
                     $('.cst-Disc').prop('disabled', false);
@@ -394,6 +412,7 @@ $(document).ready(function () {
 
 
         } else if (isValid && (autoCheck === true || strategy === 'Auto')) {
+            $('.spinner-cst2').show();
             console.log("All checks passed. Proceeding with further actions.");
 
             //  $('#spinner-border').hide();
@@ -421,10 +440,12 @@ $(document).ready(function () {
                     //   $('#spinner-border').show();
                     var flag = true;
                     getDatasetContent(dataset, flag);
+                    $('.spinner-cst2').hide();
 
 
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
+                    $('.spinner-cst2').hide();
                     console.log("Error during discretize:", textStatus, errorThrown);
                     // $('#spinner-border').hide();
                     $('.cst-Disc').prop('disabled', false);
@@ -434,6 +455,7 @@ $(document).ready(function () {
         }
 
         else {
+            $('.spinner-cst2').hide();
             console.log("Some checks failed. Please address the issues.");
         }
 
