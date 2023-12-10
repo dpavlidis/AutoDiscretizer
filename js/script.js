@@ -233,6 +233,7 @@ $(document).ready(function () {
         }
     }
 
+    
 
     function displayCheckboxes(headers) {
         $('.checkbox-container').show();
@@ -249,8 +250,6 @@ $(document).ready(function () {
         checkboxHtml += '</form>';
 
         $('.checkbox-container').html(checkboxHtml);
-
-
     }
 
 
@@ -268,20 +267,6 @@ $(document).ready(function () {
     }
 
 
-
-    function getCheckboxNames() {
-        return checkboxNames.filter(function (name, index) {
-            return $('#chk_' + index).prop('checked');
-        });
-    }
-
-    function checkCheckboxStates() {
-
-        var checkedNames = getCheckboxNames();
-
-
-        return checkedNames;
-    }
 
     function updateDropdown(data) {
 

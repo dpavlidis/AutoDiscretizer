@@ -35,6 +35,8 @@ best_binned_dataset = None
 for strategy in ['uniform', 'quantile', 'kmeans']:
     kbins = KBinsDiscretizer(n_bins=bins, encode='ordinal', strategy=strategy, subsample=1000)
     X_binned = kbins.fit_transform(X)
+    
+    X_binned = X_binned.astype(int)
 
     data[selected_columns] = X_binned
 

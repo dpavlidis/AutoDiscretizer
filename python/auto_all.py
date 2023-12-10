@@ -36,6 +36,8 @@ for bins in range(2, 21):
         kbins = KBinsDiscretizer(n_bins=bins, encode='ordinal', strategy=strategy, subsample=1000)
         X_binned = kbins.fit_transform(X)
 
+        X_binned = X_binned.astype(int)
+
         data[selected_columns] = X_binned
 
         V = data.drop(target_class, axis=1)
