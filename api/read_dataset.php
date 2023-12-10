@@ -57,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             }
 
             $numericColumns = array();
+            $categoricalIntegerColumns = array();
             foreach ($data[0] as $index => $columnName) {
                 $isNumeric = true;
                 for ($i = 1; $i < count($data); $i++) {
@@ -70,9 +71,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 }
             }
 
+            foreach ($data[0] as $index => $columnName) {
+                $isInteger = true;
+                $hasCategorical = false;
+                for ($i = 1; $i < count($data); $i++) {
+                    $value = $data[$i][$index];
+                    if (!is_numeric($value) || strpos($value, '.') !== false) {
+                        $isInteger = false;
+                    }
+                    if (!is_numeric($value)) {
+                        $hasCategorical = true;
+                    }
+                    if (!$isInteger || $hasCategorical) {
+                        break;
+                    }
+                }
+
+                if ($isInteger || $hasCategorical) {
+                    $categoricalIntegerColumns[] = $columnName;
+                }
+            }
+
+
+
+
+
+
             $response = array(
                 'numericColumns' => $numericColumns,
-                'dataset' => $data 
+                'categoricalIntegerColumns' => $categoricalIntegerColumns,
+                'dataset' => $data
             );
 
             header('Content-Type: application/json');

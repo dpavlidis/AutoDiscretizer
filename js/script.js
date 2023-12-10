@@ -161,7 +161,7 @@ $(document).ready(function () {
                 if (flag === false) {
                     displayTable(response.dataset, flag);
                     displayCheckboxes(response.numericColumns);
-                    updateDropdown(response.dataset[0]);
+                    updateDropdown(response.categoricalIntegerColumns);
                 } else if (flag === true) {
                     displayTable(response.dataset, flag);
                 } else {
