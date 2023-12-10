@@ -31,7 +31,7 @@ best_strategy = ''
 best_binned_dataset = None
 best_num_bins = 0
 
-for bins in range(2, 11): 
+for bins in range(2, 21): 
     for strategy in ['uniform', 'quantile', 'kmeans']:
         kbins = KBinsDiscretizer(n_bins=bins, encode='ordinal', strategy=strategy, subsample=1000)
         X_binned = kbins.fit_transform(X)
