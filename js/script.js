@@ -118,7 +118,7 @@ $(document).ready(function () {
                     if (response === 'no numeric') {
                         $(".file-message").text("The file must contain at least one numeric column.");
                         $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .display-div, .down-but, .spinner-cst1").hide();
-                        $('#uploadBtn').prop('disabled', false);
+                        $('#uploadBtn').removeClass('disabled');
                    //     fileInput.prop('disabled', false);
                         //       $('#uploadBtn').prop('disabled', false);
                         return;
@@ -367,6 +367,13 @@ $(document).ready(function () {
                 alert("Please select a target class!");
             }
         }
+
+        if ($('.display-div').is(':visible')) {
+            if (checkedCheckboxes.includes(target_class)) {
+                isValid = false;
+                alert("You cant do discretization on column that is also Class!");
+              }
+            }
 
 
         if (isValid && autoCheck === false && strategy != 'Auto') {
