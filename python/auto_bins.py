@@ -5,6 +5,10 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import accuracy_score
 import sys
 import os
+import json 
+#import warnings
+
+#warnings.filterwarnings("ignore", category=UserWarning, module="sklearn.preprocessing._discretization")
 
 csv_file = sys.argv[1]
 strategy = sys.argv[2]
@@ -18,22 +22,22 @@ if len(data.columns) == 1:
 
 selected_columns = list(map(str.strip, selected_columns))
 
-print("Dataset columns:\n", data.columns)
-print("Selected columns:\n", selected_columns)
+#print("Dataset columns:\n", data.columns)
+#print("Selected columns:\n", selected_columns)
 
 X = data.loc[:, selected_columns]
 y = data[target_class]
 
-print("X:\n", X)
+#print("X:\n", X)
 
-print("y:\n", y)
+#print("y:\n", y)
 
 best_accuracy = 0
 best_bin_number = 0
 best_binned_dataset = None
 
 for n_bins in range(2, 21):
-    kbins = KBinsDiscretizer(n_bins=n_bins, encode='ordinal', strategy=strategy, subsample=1000)
+    kbins = KBinsDiscretizer(n_bins=n_bins, encode='ordinal', strategy=strategy, subsample=None)
     X_binned = kbins.fit_transform(X)
 
     X_binned = X_binned.astype(int)
@@ -59,19 +63,21 @@ for n_bins in range(2, 21):
 
     accuracy = accuracy_score(y_test, y_pred)
 
-    print("accuracy :\n", accuracy)
+    #print("accuracy :\n", accuracy)
 
-    if accuracy > best_accuracy:
+    if accuracy >= best_accuracy:
         best_accuracy = accuracy
         best_bin_number = n_bins
         best_binned_dataset = data[selected_columns].copy()
 
 data[selected_columns] = best_binned_dataset
 
-print("Best bin number:", best_bin_number)
-print("Best accuracy:", best_accuracy)
+result = {
+    "best_bin_number": best_bin_number,
+    "best_accuracy": best_accuracy
+}
 
-print("data :\n", data)
+print(json.dumps(result))
 
 base_name = os.path.splitext(os.path.basename(csv_file))[0]
 
@@ -82,4 +88,4 @@ output_file = os.path.join(output_folder, f"{base_name}.csv")
 
 data.to_csv(output_file, index=False)
 
-print("Success: dataset saved to", output_file)
+#print("Success: dataset saved to", output_file)

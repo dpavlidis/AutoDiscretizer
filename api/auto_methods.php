@@ -65,7 +65,7 @@ if (!isset($data['dataset'], $data['checkedCheckboxes'], $data['strategy'], $dat
 
     header('Content-Type: application/json');
 
-    echo json_encode(['success' => true, 'output' => $output]);
+    echo json_encode(['output' => $output]);
 } else {
     log_error('Invalid request method');
 

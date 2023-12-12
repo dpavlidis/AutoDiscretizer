@@ -33,7 +33,7 @@ best_num_bins = 0
 
 for bins in range(2, 21): 
     for strategy in ['uniform', 'quantile', 'kmeans']:
-        kbins = KBinsDiscretizer(n_bins=bins, encode='ordinal', strategy=strategy, subsample=1000)
+        kbins = KBinsDiscretizer(n_bins=bins, encode='ordinal', strategy=strategy, subsample=None)
         X_binned = kbins.fit_transform(X)
 
         X_binned = X_binned.astype(int)
@@ -56,7 +56,7 @@ for bins in range(2, 21):
 
         print("accuracy for strategy", strategy, "and bins", bins, ":\n", accuracy)
 
-        if accuracy > best_accuracy:
+        if accuracy >= best_accuracy:
             best_accuracy = accuracy
             best_strategy = strategy
             best_binned_dataset = data[selected_columns].copy()

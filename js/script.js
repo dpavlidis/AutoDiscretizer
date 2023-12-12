@@ -427,7 +427,7 @@ $(document).ready(function () {
                 dataType: 'json',
                 success: function (response) {
 
-                    console.log("data from auto_bins.php: " + response);
+                    console.log("data from auto_bins.php: " + response.output[0]);
                     //   $('#spinner-border').show();
                     var flag = true;
                     getDatasetContent(dataset, flag);
