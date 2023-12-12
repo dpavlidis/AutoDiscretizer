@@ -6,9 +6,9 @@ from sklearn.metrics import accuracy_score
 import sys
 import os
 import json 
-#import warnings
+import warnings
 
-#warnings.filterwarnings("ignore", category=UserWarning, module="sklearn.preprocessing._discretization")
+warnings.filterwarnings("ignore", category=UserWarning, module="sklearn.preprocessing._discretization")
 
 csv_file = sys.argv[1]
 strategy = sys.argv[2]
@@ -65,19 +65,16 @@ for n_bins in range(2, 21):
 
     #print("accuracy :\n", accuracy)
 
-    if accuracy >= best_accuracy:
+    if accuracy > best_accuracy:
         best_accuracy = accuracy
         best_bin_number = n_bins
         best_binned_dataset = data[selected_columns].copy()
 
 data[selected_columns] = best_binned_dataset
 
-result = {
-    "best_bin_number": best_bin_number,
-    "best_accuracy": best_accuracy
-}
+best_accuracy = round(best_accuracy, 4)
 
-print(json.dumps(result))
+print(json.dumps({"best_accuracy": best_accuracy, "best_bin_number": best_bin_number}))
 
 base_name = os.path.splitext(os.path.basename(csv_file))[0]
 

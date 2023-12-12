@@ -5,6 +5,12 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import accuracy_score
 import sys
 import os
+import json 
+
+
+import warnings
+
+warnings.filterwarnings("ignore", category=UserWarning, module="sklearn.preprocessing._discretization")
 
 csv_file = sys.argv[1]
 target_class = sys.argv[2]
@@ -17,19 +23,19 @@ if len(data.columns) == 1:
 
 selected_columns = list(map(str.strip, selected_columns))
 
-print("Dataset columns:\n", data.columns)
-print("Selected columns:\n", selected_columns)
+#print("Dataset columns:\n", data.columns)
+#print("Selected columns:\n", selected_columns)
 
 X = data.loc[:, selected_columns]
 y = data[target_class]
 
-print("X:\n", X)
-print("y:\n", y)
+#print("X:\n", X)
+#print("y:\n", y)
 
 best_accuracy = 0
 best_strategy = ''
 best_binned_dataset = None
-best_num_bins = 0
+best_bin_number = 0
 
 for bins in range(2, 21): 
     for strategy in ['uniform', 'quantile', 'kmeans']:
@@ -54,21 +60,25 @@ for bins in range(2, 21):
 
         accuracy = accuracy_score(y_test, y_pred)
 
-        print("accuracy for strategy", strategy, "and bins", bins, ":\n", accuracy)
+        #print("accuracy for strategy", strategy, "and bins", bins, ":\n", accuracy)
 
-        if accuracy >= best_accuracy:
+        if accuracy > best_accuracy:
             best_accuracy = accuracy
             best_strategy = strategy
             best_binned_dataset = data[selected_columns].copy()
-            best_num_bins = bins
+            best_bin_number = bins
 
 data[selected_columns] = best_binned_dataset
 
-print("Best strategy:", best_strategy)
-print("Best accuracy:", best_accuracy)
-print("Best number of bins:", best_num_bins)
+best_accuracy = round(best_accuracy, 4)
 
-print("data :\n", data)
+print(json.dumps({"best_accuracy": best_accuracy, "best_strategy": best_strategy, "best_bin_number": best_bin_number}))
+
+#print("Best strategy:", best_strategy)
+#print("Best accuracy:", best_accuracy)
+#print("Best number of bins:", best_bin_number)
+
+#print("data :\n", data)
 
 base_name = os.path.splitext(os.path.basename(csv_file))[0]
 
@@ -79,4 +89,4 @@ output_file = os.path.join(output_folder, f"{base_name}.csv")
 
 data.to_csv(output_file, index=False)
 
-print("Success: dataset saved to", output_file)
+#print("Success: dataset saved to", output_file)

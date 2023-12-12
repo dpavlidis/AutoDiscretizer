@@ -106,9 +106,8 @@ body {
   margin-top: 70px;
 }
 
-.btn-primary {
+.btn-primary{
   margin-top: 2vh;
-  margin-left: 46.5vw;
   width: 6.5vw;
   background-color: #feffff;
   color: #0a4650;
@@ -189,7 +188,7 @@ body {
 
 .table-outer-container3 {
   margin-top: 2vh;
-  padding: 60px;
+  padding: 0px 60px 60px 60px;
   width: 60vw;
   max-height: 65vh;
   margin-left: 20vw;
@@ -314,7 +313,8 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.fa-cloud-arrow-up {
+.fa-cloud-arrow-up,
+.fa-cloud-arrow-down {
   margin-right: 1px;
 }
 
@@ -351,7 +351,7 @@ footer {
 .spinner-cst2 {
   display: none;
   margin-top: 2vh;
-  margin-left: 49vw;
+  margin-left: 49.5vw;
 }
 
 .btn.disabled,
@@ -366,6 +366,18 @@ footer {
   margin-top: 4vh;
   text-align: center;
 }
+
+.table-text-eva {
+  margin-top: 4vh;
+  text-align: center;
+}
+
+.table-eva {
+  border: 1px solid rgba(58, 155, 158, 0.1);
+  margin-top: 5vh;
+}
+
+
 
 h4 {
   text-decoration: underline;

@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .display-div, .down-but, .spinner-cst1").hide();
+    $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .table-outer-container3, .display-div, .down-but, .spinner-cst1").hide();
 
     var currentPath = window.location.pathname;
 
@@ -62,7 +62,7 @@ $(document).ready(function () {
     });
 
     $('.file-input').on('change', function () {
-        $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .display-div, .down-but, .spinner-cst1").hide();
+        $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .table-outer-container3, .display-div, .down-but, .spinner-cst1").hide();
     });
 
     $('.navbar-nav a').on('click', function () {
@@ -86,7 +86,7 @@ $(document).ready(function () {
         if (!file) {
 
             $(".file-message").text("Please upload a dataset.");
-            $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .display-div, .down-but, .spinner-cst1").hide();
+            $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .table-outer-container3, .display-div, .down-but, .spinner-cst1").hide();
             return;
         }
 
@@ -94,13 +94,13 @@ $(document).ready(function () {
 
         if ($.inArray(fileType, ['csv', 'xlsx', 'xls']) === -1) {
             $(".file-message").text("Please upload a valid CSV, XLSX, or XLS file.");
-            $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .display-div, .down-but, .spinner-cst1").hide();
+            $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .table-outer-container3, .display-div, .down-but, .spinner-cst1").hide();
             return;
         }
 
         if (file) {
 
-         //   $('#uploadBtn').prop('disabled', true);
+            //   $('#uploadBtn').prop('disabled', true);
             $('#uploadBtn').addClass('disabled');
             // fileInput.prop('disabled', true);
             var formData = new FormData();
@@ -117,9 +117,9 @@ $(document).ready(function () {
 
                     if (response === 'no numeric') {
                         $(".file-message").text("The file must contain at least one numeric column.");
-                        $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .display-div, .down-but, .spinner-cst1").hide();
+                        $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .table-outer-container3, .display-div, .down-but, .spinner-cst1").hide();
                         $('#uploadBtn').removeClass('disabled');
-                   //     fileInput.prop('disabled', false);
+                        //     fileInput.prop('disabled', false);
                         //       $('#uploadBtn').prop('disabled', false);
                         return;
                     }
@@ -129,7 +129,7 @@ $(document).ready(function () {
                     $('#uploadBtn').removeClass('disabled')
                     $('.table-outer-container2').hide();
                     $('.down-but').hide();
-                  
+
 
                 },
                 error: function () {
@@ -233,7 +233,7 @@ $(document).ready(function () {
         }
     }
 
-    
+
 
     function displayCheckboxes(headers) {
         $('.checkbox-container').show();
@@ -357,8 +357,8 @@ $(document).ready(function () {
             if (checkedCheckboxes.includes(target_class)) {
                 isValid = false;
                 alert("You cant do discretization on column that is also Class!");
-              }
             }
+        }
 
 
         if (isValid && autoCheck === false && strategy != 'Auto') {
@@ -426,11 +426,57 @@ $(document).ready(function () {
                 contentType: 'application/json',
                 dataType: 'json',
                 success: function (response) {
+                    //   console.log(response);
 
-                    console.log("data from auto_bins.php: " + response.output[0]);
+
+                    var responseData = JSON.parse(response.output[0]);
+
+
+                    var bestAccuracy = responseData.best_accuracy;
+                    console.log("best_accuracy: " + bestAccuracy);
+
+                    if (strategy === 'Auto') {
+                        var bestStrategy = responseData.best_strategy;
+                        var capitalizedBestStrategy = bestStrategy.charAt(0).toUpperCase() + bestStrategy.slice(1);
+                        console.log("best_accuracy: " + capitalizedBestStrategy);
+                    } else {
+                        console.log("strategy: " + strategy);
+                    }
+
+                    if (autoCheck === true) {
+                        var best_bins = responseData.best_bin_number;
+                        console.log("best_bins: " + best_bins);
+                    } else {
+                        console.log("bins: " + bins);
+                    }
+
+                    console.log("class: " + target_class);
+
                     //   $('#spinner-border').show();
                     var flag = true;
                     getDatasetContent(dataset, flag);
+
+                    $('.table-outer-container3').show();
+
+                    $('.table-outer-container3 tbody tr:first-child td:first-child').text(bestAccuracy);
+
+                    if (strategy === 'Auto') {
+                        var bestStrategy = responseData.best_strategy;
+                        var capitalizedBestStrategy = bestStrategy.charAt(0).toUpperCase() + bestStrategy.slice(1);
+                        $('.table-outer-container3 tbody tr:first-child td:nth-child(2)').text(capitalizedBestStrategy);
+                    } else {
+                        $('.table-outer-container3 tbody tr:first-child td:nth-child(2)').text(strategy);
+                    }
+
+                    if (autoCheck === true) {
+                        var best_bins = responseData.best_bin_number;
+                        $('.table-outer-container3 tbody tr:first-child td:nth-child(3)').text(best_bins);
+                    } else {
+                        $('.table-outer-container3 tbody tr:first-child td:nth-child(3)').text(bins);
+                    }
+
+                    $('.table-outer-container3 tbody tr:first-child td:nth-child(4)').text(target_class);
+
                     $('.spinner-cst2').hide();
 
 
