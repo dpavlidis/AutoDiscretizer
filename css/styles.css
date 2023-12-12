@@ -60,7 +60,6 @@ body {
   height: 150px;
 }
 
-
 .file-drop-area {
   position: relative;
   display: flex;
@@ -106,23 +105,26 @@ body {
   margin-top: 70px;
 }
 
-.btn-primary{
+.btn-primary {
   margin-top: 2vh;
-  width: 6.5vw;
+  width: 100%; 
+  max-width: 120px; 
   background-color: #feffff;
   color: #0a4650;
+  box-sizing: border-box; 
+  padding: 8px 15px; 
 }
 
 .cst-Disc {
   border-color: #060f11;
   margin-left: 18.5vw;
   margin-top: 30px;
-  width: auto; 
-  min-width: 7vw; 
+  width: auto;
+  min-width: 7vw;
   height: 6vh;
   background-color: rgb(255, 255, 255);
   color: #060f11;
-  white-space: normal; 
+  white-space: normal;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -198,8 +200,6 @@ body {
   transition: 0.2s;
   border: 1px solid #9aa9b3;
 }
-
-
 
 .checkbox-container {
   margin-left: 20vw;
@@ -320,6 +320,12 @@ body {
 
 .down-but {
   margin-top: 1.5vh;
+  width: 100%; 
+  max-width: 120px; 
+  background-color: #feffff;
+  color: #0a4650;
+  box-sizing: border-box; 
+  padding: 8px 15px; 
 }
 
 .col-lg-6 {
@@ -343,7 +349,7 @@ footer {
   margin-right: 4vh;
 }
 
-.fa-circle-cst{
+.fa-circle-cst {
   margin-right: 4px;
 }
 
@@ -356,13 +362,12 @@ footer {
 
 .btn.disabled,
 .btn:disabled {
-    cursor: not-allowed;
-    background-color: #feffff;
-    color: #0a4650;
+  cursor: not-allowed;
+  background-color: #feffff;
+  color: #0a4650;
 }
 
 .table-text-ori {
-
   margin-top: 4vh;
   text-align: center;
 }
@@ -377,9 +382,49 @@ footer {
   margin-top: 5vh;
 }
 
-
-
 h4 {
   text-decoration: underline;
 }
 
+/* Media Queries for Responsive Design */
+@media only screen and (max-width: 768px) {
+  .navbar-brand {
+    padding-left: 5vw;
+    font-size: 1.5em;
+  }
+
+  .navbar-nav {
+    margin-left: 10vw;
+  }
+
+  .upload-container {
+    margin-top: 8vh;
+    margin-left: 5vw;
+    width: 90vw;
+  }
+
+  .col-md-12 {
+    width: 80vw;
+  }
+
+  .file-drop-area,
+  .choose-file-button {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .mt-100 {
+    margin-top: 50px;
+  }
+
+  .table-outer-container,
+  .table-outer-container2,
+  .table-outer-container3,
+  .checkbox-container,
+  .method-container,
+  .bins-container,
+  .col-lg-6 {
+    width: 90vw;
+    margin-left: 5vw;
+  }
+}
