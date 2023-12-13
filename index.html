@@ -1,58 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KBinsDiscretizer</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KBinsDiscretizer</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/favicons/favicon.ico">
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/favicons/favicon.ico">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/styles.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/home.css">
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
 
-    <!-- Custom JavaScript -->
-    <script src="js/script.js"></script>
+  <!-- Custom JavaScript -->
+  <script src="js/script.js"></script>
 </head>
+
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="./index.html">
-                <img src="assets/favicons/favicon.ico" alt="KBinsDiscretizer Logo" width="30" height="30" class="d-inline-block align-top">
-                KBinsDiscretizer
-            </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./kbins.html">KBins</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./about.html">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="">Rate us</a>
-              </li>
-              <!--
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="./index.html">
+        <img src="assets/favicons/favicon.ico" alt="KBinsDiscretizer Logo" width="30" height="30"
+          class="d-inline-block align-top">
+        KBinsDiscretizer
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./kbins.html">KBins</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">Rate us</a>
+          </li>
+          <!--
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Dropdown
@@ -68,11 +72,70 @@
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
               </li>
             -->
-            </ul>
-          </div>
-        </div>
-      </nav>
-      
-    
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="line">
+  </div>
+
+  <div class="home-container">
+  <section id="welcome">
+     <h1>Welcome to the KBinsDiscretizer App!</h1>
+  </section>
+
+  <section id="overview">
+    <h2>Overview:</h2>
+    <p>Transform your continuous data into discrete bins effortlessly with the KBinsDiscretizer App. Our user-friendly web application allows you to upload datasets, select specific columns for discretization, choose strategies, and set the number of bins according to your preferences. Whether you're an experienced data scientist or a beginner, our app simplifies the process of preprocessing your data for improved analysis and model training.</p>
+  </section>
+
+  <section id="features">
+    <h2>Features:</h2>
+    <ul>
+      <li><strong>User-Friendly Interface:</strong> Easily upload your dataset and navigate through the steps with a simple and intuitive interface.</li>
+      <li><strong>Column Selection:</strong> Choose the columns you want to discretize, providing you with flexibility and control over your data preprocessing.</li>
+      <li><strong>Strategy Selection:</strong> Select from a range of strategies, including custom strategies, to tailor the discretization process to your specific needs.</li>
+      <li><strong>Manual Binning:</strong> Choose the number of bins for each selected column to achieve the granularity that suits your analysis.</li>
+      <li><strong>Auto Options:</strong> Utilize the power of machine learning with auto strategy and auto bins. Our app employs Naive Bayes on the binned dataset to automatically determine the best number of bins or strategy based on accuracy.</li>
+    </ul>
+  </section>
+
+  <section id="how-it-works">
+    <h2>How It Works:</h2>
+    <ol>
+      <li><strong>Upload Your Dataset:</strong> Start by uploading your dataset in a common format (CSV, Excel).</li>
+      <li><strong>Select Columns:</strong> Choose the columns you want to discretize. You have full control over the variables you want to transform.</li>
+      <li><strong>Choose Strategy:</strong> Pick a strategy that aligns with your data characteristics or opt for the Auto Strategy to let our app determine the best strategy for your dataset.</li>
+      <li><strong>Set Bins:</strong> Specify the number of bins manually or choose Auto Bins to leverage machine learning for optimal bin determination.</li>
+      <li><strong>Select Class (Auto Methods):</strong> If using the Auto Methods, specify the target class for Naive Bayes to optimize binning based on accuracy.</li>
+      <li><strong>Click Discretization:</strong> Once your preferences are set, click the Discretization button to obtain your binned dataset.</li>
+    </ol>
+  </section>
+
+  <section id="why-choose-us">
+    <h2>Why Choose Us:</h2>
+    <ul>
+      <li><strong>Efficiency:</strong> Save time with our streamlined process for data discretization.</li>
+      <li><strong>Flexibility:</strong> Tailor the discretization to your unique dataset and analysis requirements.</li>
+      <li><strong>Auto Optimization:</strong> Harness the power of machine learning to automatically optimize binning strategies for improved accuracy.</li>
+    </ul>
+  </section>
+
+   <!-- another footer testing which better
+  <footer>
+    <p>Transform your data seamlessly and make better-informed decisions with the KBinsDiscretizer App. Start exploring the possibilities today!</p>
+  </footer>
+  -->
+
+  <footer class="bg-body-tertiary text-center text-lg-start">
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+      © 2024 Copyright:
+      <a class="text-body" href="#">KBinsDiscretizer</a>
+    </div>
+  </footer>
+</div>
+
 </body>
+
 </html>

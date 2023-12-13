@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #eeeeeed8;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.home-container {
+    background-image: url('../assets/images/background-home.jpg'); 
+    background-repeat: no-repeat;
+    background-size: cover; 
+    background-position: center center; 
+    background-attachment: fixed;
+}
+
+.navbar {
+  position: fixed;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  z-index: 1000;
+}
+
+.navbar-brand {
+  padding-left: 8vw;
+  font-size: 1.8em;
+}
+
+.navbar-nav {
+  margin-left: 54vw;
+}
+
+.navbar-brand img {
+  height: 1.7em;
+}
+
+.nav-link {
+  font-size: 1.2em;
+}
+
+.line {
+  position: relative;
+  background-color: #206e7c;
+  margin-top: 8vh;
+  min-height: 0.8vh;
+  max-height: 0.8vh;
+}
+
+#welcome {
+  margin-top: 5vh;
+}
+
+#overview {
+    margin-top: 2vh; 
+}
+  
+section {
+  max-width: 800px;
+  margin: 30px auto;
+}
+  
+h2 {
+  color: #0a4650;
+}
+  
+ul, ol {
+  padding-left: 20px;
+}
+
+footer {
+    text-align: center;
+    margin-top: auto;
+}
+
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .navbar-brand {
+      padding-left: 4vw;
+    }
+  
+    .navbar-nav {
+      margin-left: 20px;
+    }
+  
+    .col-lg-6 {
+      width: 100%;
+    }
+}
+
+
+
+
+
+
+
+  
+/* another footer for test which is better
+#why-choose-us {
+  margin-bottom: 4em;
+}
+
+footer {
+  background-color: #3498db;
+  color: #fff;
+  text-align: center;
+  padding: 1em;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  align-items: flex-end; 
+}
+
+footer p {
+  margin-top: 12px; 
+}
+
+*/

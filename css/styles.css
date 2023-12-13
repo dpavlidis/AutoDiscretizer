@@ -18,8 +18,7 @@ body {
 .navbar {
   position: fixed;
   background-color: white;
-  border-top: 1px solid #c3d8e6;
-  border-bottom: 1px solid #c3d8e6;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 100%;
   z-index: 1000;
 }
@@ -52,7 +51,8 @@ body {
   background: linear-gradient(to right, #0a4650, #46696e);
   color: #D7D7EF;
   font-family: 'Lato', sans-serif;
-  border: 2px solid #9aa9b3;
+  border: 1px solid #9aa9b3;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .col-md-12 {
@@ -218,9 +218,9 @@ body {
   overflow-y: auto;
   padding-bottom: 3vh;
   background-color: white;
-  border-radius: 3px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: 0.2s;
-  border: 1px solid #9aa9b3;
 }
 
 .table-outer-container3 {
@@ -231,9 +231,9 @@ body {
   margin-left: 20vw;
   overflow-y: auto;
   background-color: white;
-  border-radius: 3px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: 0.2s;
-  border: 1px solid #9aa9b3;
 }
 
 .checkbox-container {
@@ -241,8 +241,8 @@ body {
   margin-top: 1vw;
   width: 60vw;
   position: relative;
-  border: 1px solid #9aa9b3;
-  border-radius: 3px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: 0.2s;
   padding: 40px;
   background-color: white;
@@ -254,8 +254,8 @@ body {
   margin-top: 1vw;
   width: 60vw;
   position: relative;
-  border: 1px solid #9aa9b3;
-  border-radius: 3px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: 0.2s;
   padding: 45px;
   background-color: white;
@@ -324,8 +324,8 @@ body {
   margin-top: 1vw;
   width: 60vw;
   position: relative;
-  border: 1px solid #9aa9b3;
-  border-radius: 3px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: 0.2s;
   padding: 50px;
   background-color: white;
@@ -452,7 +452,7 @@ footer {
 .spinner-cst2 {
   display: none;
   margin-top: 2vh;
-  margin-left: 49.5vw;
+  margin-left: 49.4vw;
 }
 
 .btn.disabled,
