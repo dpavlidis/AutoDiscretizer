@@ -8,7 +8,7 @@ import os
 import json 
 import warnings
 
-warnings.filterwarnings("ignore", category=UserWarning, module="sklearn.preprocessing._discretization")
+warnings.filterwarnings("ignore")
 
 csv_file = sys.argv[1]
 strategy = sys.argv[2]
@@ -74,7 +74,7 @@ data[selected_columns] = best_binned_dataset
 
 best_accuracy = round(best_accuracy, 4)
 
-print(json.dumps({"best_accuracy": best_accuracy, "best_bin_number": best_bin_number}))
+print(json.dumps({"best_accuracy": best_accuracy, "best_bin_number": best_bin_number, "script": "auto_bins"}))
 
 base_name = os.path.splitext(os.path.basename(csv_file))[0]
 

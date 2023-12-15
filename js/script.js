@@ -72,13 +72,11 @@ $(document).ready(function () {
 
 
     function openModal(title, message) {
-        // Update the modal content dynamically using jQuery
         $('#modal-title').html(title);
         $('#modal-message').html(message);
-    
-        // Check the modal toggle checkbox to open the modal
+
         $('#modal-toggle').prop('checked', true);
-      }
+    }
 
     //--------------------------------------------------------------------- API:
 
@@ -419,6 +417,12 @@ $(document).ready(function () {
             //  $('#spinner-border').hide();
             $('.cst-Disc').prop('disabled', false);
 
+            if (autoCheck === true) {
+                autoCheck = 1;
+            } else {
+                autoCheck = 0;
+            }
+
             var dataset = file.name;
             console.log(dataset);
 
@@ -438,9 +442,7 @@ $(document).ready(function () {
                 success: function (response) {
                     //   console.log(response);
 
-
                     var responseData = JSON.parse(response.output[0]);
-
 
                     var bestAccuracy = responseData.best_accuracy;
                     console.log("best_accuracy: " + bestAccuracy);
@@ -453,7 +455,7 @@ $(document).ready(function () {
                         console.log("strategy: " + strategy);
                     }
 
-                    if (autoCheck === true) {
+                    if (autoCheck === 1) {
                         var best_bins = responseData.best_bin_number;
                         console.log("best_bins: " + best_bins);
                     } else {
@@ -478,7 +480,7 @@ $(document).ready(function () {
                         $('.table-outer-container3 tbody tr:first-child td:nth-child(2)').text(strategy);
                     }
 
-                    if (autoCheck === true) {
+                    if (autoCheck === 1) {
                         var best_bins = responseData.best_bin_number;
                         $('.table-outer-container3 tbody tr:first-child td:nth-child(3)').text(best_bins);
                     } else {

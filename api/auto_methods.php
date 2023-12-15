@@ -45,22 +45,25 @@ if (!isset($data['dataset'], $data['checkedCheckboxes'], $data['strategy'], $dat
         exit;
     }
 
-    if ($strategy === 'auto' && $autoCheck) {
+    if ($strategy === 'auto' && $autoCheck === 1) {
         $pythonScript = "../python/auto_all.py";
         $command = "python $pythonScript " . escapeshellarg($target_file) . " " . escapeshellarg($target_class) . " " . implode(' ', array_map('escapeshellarg', $columns)) . " 2>&1";
        exec($command, $output, $return_var);
 
-    }elseif ($strategy === 'auto' && !$autoCheck) {
+    } elseif ($strategy === 'auto' && $autoCheck === 0) {
         $pythonScript = "../python/auto_strategy.py";
 
         $command = "python $pythonScript " . escapeshellarg($target_file) . " " . escapeshellarg($bins) . " " . escapeshellarg($target_class) . " " . implode(' ', array_map('escapeshellarg', $columns)) . " 2>&1";
         exec($command, $output, $return_var);
 
-    } elseif ($strategy !== 'auto' && $autoCheck) {
+    } elseif ($strategy !== 'auto' && $autoCheck === 1) {
         $pythonScript = "../python/auto_bins.py";
 
         $command = "python $pythonScript " . escapeshellarg($target_file) . " " . escapeshellarg($strategy) . " " . escapeshellarg($target_class) . " " . implode(' ', array_map('escapeshellarg', $columns)) . " 2>&1";
         exec($command, $output, $return_var);
+    } else {
+        echo json_encode(['error' => 'Unsupported combination of strategy and autoCheck']);
+        exit;
     }
 
     if ($return_var !== 0) {
@@ -73,7 +76,6 @@ if (!isset($data['dataset'], $data['checkedCheckboxes'], $data['strategy'], $dat
     echo json_encode(['output' => $output], JSON_PRETTY_PRINT);
 } else {
     log_error('Invalid request method');
-
     echo json_encode(['error' => 'Invalid request method']);
 }
 

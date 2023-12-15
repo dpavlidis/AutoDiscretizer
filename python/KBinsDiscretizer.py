@@ -2,6 +2,9 @@ import pandas as pd
 from sklearn.preprocessing import KBinsDiscretizer
 import sys
 import os
+import warnings
+
+warnings.filterwarnings("ignore")
 
 csv_file = sys.argv[1]
 strategy = sys.argv[2]

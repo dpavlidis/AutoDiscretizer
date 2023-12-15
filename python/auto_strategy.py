@@ -6,10 +6,9 @@ from sklearn.metrics import accuracy_score
 import sys
 import os
 import json 
-
 import warnings
 
-warnings.filterwarnings("ignore", category=UserWarning, module="sklearn.preprocessing._discretization")
+warnings.filterwarnings("ignore")
 
 csv_file = sys.argv[1]
 bins = int(sys.argv[2])
@@ -70,7 +69,7 @@ data[selected_columns] = best_binned_dataset
 
 best_accuracy = round(best_accuracy, 4)
 
-print(json.dumps({"best_accuracy": best_accuracy, "best_strategy": best_strategy}))
+print(json.dumps({"best_accuracy": best_accuracy, "best_strategy": best_strategy, "script": "auto_strategy"}))
 
 #print("Best strategy:", best_strategy)
 #print("Best accuracy:", best_accuracy)
