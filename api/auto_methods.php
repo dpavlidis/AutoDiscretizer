@@ -30,6 +30,12 @@ if (!isset($data['dataset'], $data['checkedCheckboxes'], $data['strategy'], $dat
     $target_class = $data['target_class'];
     $autoCheck = $data['autoCheck'];
 
+    if (in_array($target_class, $columns)) {
+        log_error('Target class found in columns');
+        echo json_encode(['error' => 'Target class cannot be discretized! Please remove from columns the target class.']);
+        exit;
+    }
+
     $target_dir = "../datasets/";
     $target_file = $target_dir . basename($dataset_name);
 

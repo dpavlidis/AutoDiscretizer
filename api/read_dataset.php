@@ -93,10 +93,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             }
 
 
-
-
-
-
             $response = array(
                 'numericColumns' => $numericColumns,
                 'categoricalIntegerColumns' => $categoricalIntegerColumns,
