@@ -70,6 +70,16 @@ $(document).ready(function () {
         $(this).addClass('active');
     });
 
+
+    function openModal(title, message) {
+        // Update the modal content dynamically using jQuery
+        $('#modal-title').html(title);
+        $('#modal-message').html(message);
+    
+        // Check the modal toggle checkbox to open the modal
+        $('#modal-toggle').prop('checked', true);
+      }
+
     //--------------------------------------------------------------------- API:
 
     $('#uploadBtn').on('click', function () {
@@ -328,35 +338,35 @@ $(document).ready(function () {
 
         if (!file) {
             isValid = false;
-            alert("Please select a file!");
+            openModal('File Selection Error', 'Please select a file!');
         }
 
         if (checkedCheckboxes.length === 0) {
             isValid = false;
-            alert("Please check columns for discretization!");
+            openModal('Column Selection Error', 'Please check columns for discretization!');
         }
 
         if (!strategy || strategy === 'Method') {
             isValid = false;
-            alert("Please select a strategy!");
+            openModal('Strategy Selection Error', 'Please select a strategy!');
         }
 
         if ((!bins || bins < 2 || bins > 20) && autoCheck === false) {
             isValid = false;
-            alert("Please enter a value for bins between 2-20!");
+            openModal('Bins Selection Error', 'Please enter a value for bins within the range of 2 to 20.');
         }
 
         if ($('.display-div').is(':visible')) {
             if (!target_class || target_class === 'Pick Class') {
                 isValid = false;
-                alert("Please select a target class!");
+                openModal('Class Selection Error', 'Please select a target class!');
             }
         }
 
         if ($('.display-div').is(':visible')) {
             if (checkedCheckboxes.includes(target_class)) {
                 isValid = false;
-                alert("You cant do discretization on column that is also Class!");
+                openModal('Target Class Error', 'Target class cannot be discretized!');
             }
         }
 
