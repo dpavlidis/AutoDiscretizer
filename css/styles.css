@@ -394,20 +394,21 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.fa-cloud-arrow-up,
-.fa-cloud-arrow-down {
+.fa-cloud-arrow-up {
   margin-right: 1px;
 }
 
-.down-but {
-  margin-top: 1.5vh;
-  width: 100%; 
-  max-width: 120px; 
-  background-color: #feffff;
-  color: #0a4650;
-  box-sizing: border-box; 
-  padding: 8px 15px; 
+.fa-cloud-arrow-down {
+  margin-right: 5px;
 }
+
+.down-but {
+  display: flex;
+  align-items: center;
+  width: auto;
+  padding: 9px;
+}
+
 
 .col-lg-6 {
   margin-top: 1vh;

@@ -39,6 +39,9 @@ $(document).ready(function () {
         var selectedValue = $('.btn-method').text();
         var isChecked = $(this).is(':checked');
         var enterBinsInput = $("#InputBins");
+        if (isChecked) {
+            enterBinsInput.val('');
+        }
         enterBinsInput.prop("disabled", isChecked);
         $('.btn-method').text(selectedValue);
         toggleDisplayDiv(selectedValue, isChecked);
@@ -63,6 +66,11 @@ $(document).ready(function () {
 
     $('.file-input').on('change', function () {
         $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .table-outer-container3, .display-div, .down-but, .spinner-cst1").hide();
+        $('.btn-method').text('Method');
+        $('.btn-class').text('Pick Class');
+        $('#autoCheck').prop('checked', false);
+        $('#InputBins').val('');
+        $('#InputBins').prop('disabled', false);
     });
 
     $('.navbar-nav a').on('click', function () {
@@ -372,7 +380,9 @@ $(document).ready(function () {
         if (isValid && autoCheck === false && strategy != 'Auto') {
             console.log("All checks passed. Proceeding with further actions.");
             $('.spinner-cst2').show();
-
+            $('.table-outer-container2').hide();
+            $('.table-outer-container3').hide();
+            $('.down-but').hide();
             $('.cst-Disc').prop('disabled', false);
 
             var dataset = file.name;
@@ -412,6 +422,9 @@ $(document).ready(function () {
 
         } else if (isValid && (autoCheck === true || strategy === 'Auto')) {
             $('.spinner-cst2').show();
+            $('.table-outer-container2').hide();
+            $('.table-outer-container3').hide();
+            $('.down-but').hide();
             console.log("All checks passed. Proceeding with further actions.");
 
             //  $('#spinner-border').hide();
