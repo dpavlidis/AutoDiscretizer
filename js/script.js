@@ -91,7 +91,7 @@ $(document).ready(function () {
     $('#uploadBtn').on('click', function () {
 
         $('.spinner-cst1').show();
-
+        $('.table-outer-container3').hide();
 
         var fileInput = $('.file-input');
 
