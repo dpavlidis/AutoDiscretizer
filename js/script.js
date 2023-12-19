@@ -78,11 +78,9 @@ $(document).ready(function () {
         $(this).addClass('active');
     });
 
-
     function openModal(title, message) {
         $('#modal-title').html(title);
         $('#modal-message').html(message);
-
         $('#modal-toggle').prop('checked', true);
     }
 
@@ -93,14 +91,9 @@ $(document).ready(function () {
         $('.spinner-cst1').show();
         $('.table-outer-container3').hide();
 
-        var fileInput = $('.file-input');
-
         var file = $('.file-input')[0].files[0];
-        console.log(file);
-
 
         if (!file) {
-
             $(".file-message").text("Please upload a dataset.");
             $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .table-outer-container3, .display-div, .down-but, .spinner-cst1").hide();
             return;
@@ -115,10 +108,8 @@ $(document).ready(function () {
         }
 
         if (file) {
-
-            //   $('#uploadBtn').prop('disabled', true);
             $('#uploadBtn').addClass('disabled');
-            // fileInput.prop('disabled', true);
+
             var formData = new FormData();
             formData.append('file', file);
 
@@ -129,14 +120,11 @@ $(document).ready(function () {
                 contentType: false,
                 processData: false,
                 success: function (response) {
-                    console.log("data response from upload_dataset.php: " + response);
 
                     if (response === 'no numeric') {
                         $(".file-message").text("The file must contain at least one numeric column.");
                         $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .table-outer-container3, .display-div, .down-but, .spinner-cst1").hide();
                         $('#uploadBtn').removeClass('disabled');
-                        //     fileInput.prop('disabled', false);
-                        //       $('#uploadBtn').prop('disabled', false);
                         return;
                     }
 
@@ -145,7 +133,6 @@ $(document).ready(function () {
                     $('#uploadBtn').removeClass('disabled')
                     $('.table-outer-container2').hide();
                     $('.down-but').hide();
-
 
                 },
                 error: function () {
@@ -164,15 +151,12 @@ $(document).ready(function () {
     var checkboxNames = [];
 
     function getDatasetContent(dataset_name, flag) {
-        console.log("dataset name : " + dataset_name);
+
         $.ajax({
             type: "GET",
             url: "./api/read_dataset.php?dataset=" + dataset_name + "&binned=" + flag,
             dataType: "json",
             success: function (response) {
-                console.log(response);
-                //   console.log("Dataset:", response.data);
-                //   console.log("Numeric Columns:", response.numericColumns);
 
                 if (flag === false) {
                     displayTable(response.dataset, flag);
@@ -250,7 +234,6 @@ $(document).ready(function () {
     }
 
 
-
     function displayCheckboxes(headers) {
         $('.checkbox-container').show();
         var checkboxHtml = '<form>';
@@ -281,7 +264,6 @@ $(document).ready(function () {
 
         return checkedCheckboxes;
     }
-
 
 
     function updateDropdown(data) {
@@ -315,28 +297,28 @@ $(document).ready(function () {
     $('.cst-Disc').on('click', function () {
 
         var file = $('.file-input')[0].files[0];
-        console.log("file-input: " + file.name);
+        //   console.log("file-input: " + file.name);
 
         var bins = $('#InputBins').val();
-        console.log("bins: " + bins);
+        //   console.log("bins: " + bins);
 
         var strategy = $('.btn-method').text().trim();
-        console.log("strategy: " + strategy);
+        //    console.log("strategy: " + strategy);
 
         var target_class = $('.btn-class').text().trim();
-        console.log("class: " + target_class);
+        //   console.log("class: " + target_class);
 
         var checkedCheckboxes = getCheckedCheckboxes();
-        console.log(checkedCheckboxes);
+        //    console.log(checkedCheckboxes);
 
         var checkBox = $("#autoCheck");
         var autoCheck = false;
 
         if (checkBox.prop("checked")) {
-            console.log("Checkbox is checked");
+            console.log("Auto is checked");
             autoCheck = true;
         } else {
-            console.log("Checkbox is not checked");
+            console.log("Auto is not checked");
             autoCheck = false;
         }
 
@@ -378,7 +360,7 @@ $(document).ready(function () {
 
 
         if (isValid && autoCheck === false && strategy != 'Auto') {
-            console.log("All checks passed. Proceeding with further actions.");
+            console.log("checks passed.");
             $('.spinner-cst2').show();
             $('.table-outer-container2').hide();
             $('.table-outer-container3').hide();
@@ -386,7 +368,6 @@ $(document).ready(function () {
             $('.cst-Disc').prop('disabled', false);
 
             var dataset = file.name;
-            console.log(dataset);
 
             $.ajax({
                 url: './api/KBinsDiscretizer.php',
@@ -396,28 +377,22 @@ $(document).ready(function () {
                     checkedCheckboxes: checkedCheckboxes,
                     strategy: strategy,
                     bins: bins,
-                    // target_clas: target_clas, 
                 }),
                 contentType: 'application/json',
                 dataType: 'json',
                 success: function (response) {
 
-                    console.log("data from KBinsDiscretizer.php: " + response);
-                    //   $('#spinner-border').show();
                     var flag = true;
                     getDatasetContent(dataset, flag);
                     $('.spinner-cst2').hide();
-
 
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     $('.spinner-cst2').hide();
                     console.log("Error during discretize:", textStatus, errorThrown);
-                    // $('#spinner-border').hide();
                     $('.cst-Disc').prop('disabled', false);
                 }
             });
-
 
 
         } else if (isValid && (autoCheck === true || strategy === 'Auto')) {
@@ -425,9 +400,7 @@ $(document).ready(function () {
             $('.table-outer-container2').hide();
             $('.table-outer-container3').hide();
             $('.down-but').hide();
-            console.log("All checks passed. Proceeding with further actions.");
 
-            //  $('#spinner-border').hide();
             $('.cst-Disc').prop('disabled', false);
 
             if (autoCheck === true) {
@@ -437,7 +410,6 @@ $(document).ready(function () {
             }
 
             var dataset = file.name;
-            console.log(dataset);
 
             $.ajax({
                 url: './api/auto_methods.php',
@@ -453,31 +425,11 @@ $(document).ready(function () {
                 contentType: 'application/json',
                 dataType: 'json',
                 success: function (response) {
-                    //   console.log(response);
 
                     var responseData = JSON.parse(response.output[0]);
 
                     var bestAccuracy = responseData.best_accuracy;
-                    console.log("best_accuracy: " + bestAccuracy);
 
-                    if (strategy === 'Auto') {
-                        var bestStrategy = responseData.best_strategy;
-                        var capitalizedBestStrategy = bestStrategy.charAt(0).toUpperCase() + bestStrategy.slice(1);
-                        console.log("best_accuracy: " + capitalizedBestStrategy);
-                    } else {
-                        console.log("strategy: " + strategy);
-                    }
-
-                    if (autoCheck === 1) {
-                        var best_bins = responseData.best_bin_number;
-                        console.log("best_bins: " + best_bins);
-                    } else {
-                        console.log("bins: " + bins);
-                    }
-
-                    console.log("class: " + target_class);
-
-                    //   $('#spinner-border').show();
                     var flag = true;
                     getDatasetContent(dataset, flag);
 
@@ -504,12 +456,10 @@ $(document).ready(function () {
 
                     $('.spinner-cst2').hide();
 
-
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     $('.spinner-cst2').hide();
                     console.log("Error during discretize:", textStatus, errorThrown);
-                    // $('#spinner-border').hide();
                     $('.cst-Disc').prop('disabled', false);
                 }
             });
@@ -518,7 +468,7 @@ $(document).ready(function () {
 
         else {
             $('.spinner-cst2').hide();
-            console.log("Some checks failed. Please address the issues.");
+            console.log("checks failed..");
         }
 
     });

@@ -18,9 +18,6 @@ if len(data.columns) == 1:
 
 selected_columns = list(map(str.strip, selected_columns))
 
-print("Dataset columns:\n", data.columns)
-print("Selected columns:\n", selected_columns)
-
 X = data.loc[:, selected_columns]
 
 kbins = KBinsDiscretizer(n_bins=bins, encode='ordinal', strategy=strategy)
@@ -29,8 +26,6 @@ X_binned = kbins.fit_transform(X)
 X_binned = X_binned.astype(int)
 
 data[selected_columns] = X_binned
-
-print("Binned dataset:\n", data)
 
 base_name = os.path.splitext(os.path.basename(csv_file))[0]
 
@@ -42,4 +37,4 @@ output_file = os.path.join(output_folder, f"{base_name}.csv")
 
 data.to_csv(output_file, index=False)
 
-print("Success: Binned dataset saved to", output_file)
+print("Binned dataset processing was successful")

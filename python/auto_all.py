@@ -21,14 +21,8 @@ if len(data.columns) == 1:
 
 selected_columns = list(map(str.strip, selected_columns))
 
-#print("Dataset columns:\n", data.columns)
-#print("Selected columns:\n", selected_columns)
-
 X = data.loc[:, selected_columns]
 y = data[target_class]
-
-#print("X:\n", X)
-#print("y:\n", y)
 
 best_accuracy = 0
 best_strategy = ''
@@ -58,8 +52,6 @@ for bins in range(2, 21):
 
         accuracy = accuracy_score(y_test, y_pred)
 
-        #print("accuracy for strategy", strategy, "and bins", bins, ":\n", accuracy)
-
         if accuracy > best_accuracy:
             best_accuracy = accuracy
             best_strategy = strategy
@@ -72,12 +64,6 @@ best_accuracy = round(best_accuracy, 4)
 
 print(json.dumps({"best_accuracy": best_accuracy, "best_strategy": best_strategy, "best_bin_number": best_bin_number, "script": "auto_all"}))
 
-#print("Best strategy:", best_strategy)
-#print("Best accuracy:", best_accuracy)
-#print("Best number of bins:", best_bin_number)
-
-#print("data :\n", data)
-
 base_name = os.path.splitext(os.path.basename(csv_file))[0]
 
 output_folder = "../binned_datasets"
@@ -86,5 +72,3 @@ os.makedirs(output_folder, exist_ok=True)
 output_file = os.path.join(output_folder, f"{base_name}.csv")
 
 data.to_csv(output_file, index=False)
-
-#print("Success: dataset saved to", output_file)

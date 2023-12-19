@@ -22,15 +22,8 @@ if len(data.columns) == 1:
 
 selected_columns = list(map(str.strip, selected_columns))
 
-#print("Dataset columns:\n", data.columns)
-#print("Selected columns:\n", selected_columns)
-
 X = data.loc[:, selected_columns]
 y = data[target_class]
-
-#print("X:\n", X)
-
-#print("y:\n", y)
 
 best_accuracy = 0
 best_bin_number = 0
@@ -44,12 +37,7 @@ for n_bins in range(2, 21):
 
     data[selected_columns] = X_binned
 
-    #print("X_binned :\n", X_binned)
-    #print("data[selected_columns] :\n", data[selected_columns])
-    #print("data :\n", data)
-
     V = data.drop(target_class, axis=1)
-    #print("V :\n", V)
 
     X_train, X_test, y_train, y_test = train_test_split(
         V, y, test_size=0.33, random_state=125
@@ -62,8 +50,6 @@ for n_bins in range(2, 21):
     y_pred = nb_classifier.predict(X_test)
 
     accuracy = accuracy_score(y_test, y_pred)
-
-    #print("accuracy :\n", accuracy)
 
     if accuracy > best_accuracy:
         best_accuracy = accuracy
@@ -85,4 +71,3 @@ output_file = os.path.join(output_folder, f"{base_name}.csv")
 
 data.to_csv(output_file, index=False)
 
-#print("Success: dataset saved to", output_file)
