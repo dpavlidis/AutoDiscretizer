@@ -60,21 +60,6 @@ body {
   font-size: 1.2em;
 }
 
-@media (max-width: 768px) {
-  .navbar-brand {
-    padding-left: 4vw;
-    font-size: 1.5em;
-  }
-
-  .navbar-nav {
-    margin-left: 2vw;
-  }
-
-  .nav-link {
-    font-size: 1em;
-  }
-}
-
 @media (max-width: 1560px) {
   .navbar-nav {
     margin-left: 44vw;
