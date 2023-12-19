@@ -4,7 +4,7 @@ header("Access-Control-Allow-Origin: *");
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     if (isset($_GET['dataset']) && isset($_GET['binned'])) {
-  
+
         $originalFilename = $_GET['dataset'];
         $binned = $_GET['binned'];
 
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
                 fclose($file);
             } elseif ($file_extension === 'xlsx' || $file_extension === 'xls') {
-                require 'vendor/autoload.php'; 
+                require __DIR__ . '/vendor/autoload.php';
 
                 $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReaderForFile($file_path);
                 $spreadsheet = $reader->load($file_path);
@@ -58,33 +58,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
             $numericColumns = array();
             $categoricalIntegerColumns = array();
-            foreach ($data[0] as $index => $columnName) {
-                $isNumeric = true;
-                for ($i = 1; $i < count($data); $i++) {
-                    if (!is_numeric($data[$i][$index])) {
-                        $isNumeric = false;
-                        break;
-                    }
-                }
-                if ($isNumeric) {
-                    $numericColumns[] = $columnName;
-                }
-            }
 
             foreach ($data[0] as $index => $columnName) {
+                $isNumeric = true;
                 $isInteger = true;
                 $hasCategorical = false;
+
                 for ($i = 1; $i < count($data); $i++) {
                     $value = $data[$i][$index];
-                    if (!is_numeric($value) || strpos($value, '.') !== false) {
-                        $isInteger = false;
-                    }
+
                     if (!is_numeric($value)) {
+                        $isNumeric = false;
+                        $isInteger = false;
                         $hasCategorical = true;
-                    }
-                    if (!$isInteger || $hasCategorical) {
                         break;
                     }
+
+                    if ($isInteger && strpos($value, '.') !== false) {
+                        $isInteger = false;
+                    }
+                }
+
+                if ($isNumeric) {
+                    $numericColumns[] = $columnName;
                 }
 
                 if ($isInteger || $hasCategorical) {
@@ -92,11 +88,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 }
             }
 
-
             $response = array(
                 'numericColumns' => $numericColumns,
                 'categoricalIntegerColumns' => $categoricalIntegerColumns,
-                'dataset' => $data
+                'dataset' => array_slice($data, 0, 21)
             );
 
             header('Content-Type: application/json');

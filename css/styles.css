@@ -515,6 +515,12 @@ footer,
     padding: 15px;
   }
 
+  .upload-container{
+    width: 90vw;
+    margin-left: 5vw;
+    margin-right: 5vw;
+  }
+
   .method-container {
     display: block;
   }

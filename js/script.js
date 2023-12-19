@@ -207,7 +207,7 @@ $(document).ready(function () {
             tableHtml += '</tr></thead>';
 
             tableHtml += '<tbody>';
-            for (var i = 1; i < 20; i++) {
+            for (var i = 1; i < 21; i++) {
                 tableHtml += '<tr>';
                 $.each(data[i], function (index, cell) {
                     tableHtml += '<td class="py-2">' + cell + '</td>';
@@ -231,7 +231,7 @@ $(document).ready(function () {
             tableHtml += '</tr></thead>';
 
             tableHtml += '<tbody>';
-            for (var i = 1; i < 20; i++) {
+            for (var i = 1; i < 21; i++) {
                 tableHtml += '<tr>';
                 $.each(data[i], function (index, cell) {
                     tableHtml += '<td class="py-2">' + cell + '</td>';
