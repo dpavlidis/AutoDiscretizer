@@ -437,6 +437,27 @@ $(document).ready(function () {
 
                     $('.table-outer-container3 tbody tr:first-child td:first-child').text(bestAccuracy);
 
+                    /*
+                    console.log("best_accuracy: " + bestAccuracy);
+
+                    if (strategy === 'Auto') {
+                        var bestStrategy = responseData.best_strategy;
+                        var capitalizedBestStrategy = bestStrategy.charAt(0).toUpperCase() + bestStrategy.slice(1);
+                        console.log("best_accuracy: " + capitalizedBestStrategy);
+                    } else {
+                        console.log("strategy: " + strategy);
+                    }
+
+                    if (autoCheck === 1) {
+                        var best_bins = responseData.best_bin_number;
+                        console.log("best_bins: " + best_bins);
+                    } else {
+                        console.log("bins: " + bins);
+                    }
+
+                    console.log("class: " + target_class);
+                    */
+
                     if (strategy === 'Auto') {
                         var bestStrategy = responseData.best_strategy;
                         var capitalizedBestStrategy = bestStrategy.charAt(0).toUpperCase() + bestStrategy.slice(1);
