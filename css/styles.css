@@ -151,6 +151,7 @@ body {
   max-width: 120px; 
   background-color: #feffff;
   color: #060f11;
+  border-radius: 6px;
   border-color: #060f11;
   box-sizing: border-box; 
   padding: 8px 15px; 
@@ -313,10 +314,11 @@ body {
 
 .label-str-min,
 .dropdown-min-strategy,
-.dropdown-min-class
+.dropdown-min-class,
 .form-label {
   margin-left: 12px;
 }
+
 
 .dropdown-strategy {
   display: flex;
@@ -437,10 +439,6 @@ footer,
 .table-eva {
   border: 1px solid rgba(58, 155, 158, 0.1);
   margin-top: 5vh;
-}
-
-h4 {
-  text-decoration: underline;
 }
 
 @media only screen and (max-width: 1600px) {
