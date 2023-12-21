@@ -58,35 +58,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
             $numericColumns = array();
             $categoricalIntegerColumns = array();
-
             foreach ($data[0] as $index => $columnName) {
                 $isNumeric = true;
-                $isInteger = true;
-                $hasCategorical = false;
-
                 for ($i = 1; $i < count($data); $i++) {
-                    $value = $data[$i][$index];
-
-                    if (!is_numeric($value)) {
+                    if (!is_numeric($data[$i][$index])) {
                         $isNumeric = false;
-                        $isInteger = false;
-                        $hasCategorical = true;
                         break;
                     }
-
-                    if ($isInteger && strpos($value, '.') !== false) {
-                        $isInteger = false;
-                    }
                 }
-
                 if ($isNumeric) {
                     $numericColumns[] = $columnName;
+                }
+            }
+
+            foreach ($data[0] as $index => $columnName) {
+                $isInteger = true;
+                $hasCategorical = false;
+                for ($i = 1; $i < count($data); $i++) {
+                    $value = $data[$i][$index];
+                    if (!is_numeric($value) || strpos($value, '.') !== false) {
+                        $isInteger = false;
+                    }
+                    if (!is_numeric($value)) {
+                        $hasCategorical = true;
+                    }
+                    if (!$isInteger || $hasCategorical) {
+                        break;
+                    }
                 }
 
                 if ($isInteger || $hasCategorical) {
                     $categoricalIntegerColumns[] = $columnName;
                 }
             }
+
 
             $response = array(
                 'numericColumns' => $numericColumns,
