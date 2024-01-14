@@ -24,6 +24,10 @@ body {
     background-attachment: fixed;
 }
 
+p {
+  font-style: italic;
+}
+
 .navbar {
   position: fixed;
   background-color: white;
@@ -63,8 +67,8 @@ body {
 
 .line {
   position: relative;
-  background-color: #a0bcc4;
-  margin-top: 8vh;
+  background-color: white;
+  margin-top: 7vh;
   min-height: 0.8vh;
   max-height: 0.8vh;
 }
@@ -76,7 +80,11 @@ body {
 #overview {
     margin-top: 2vh; 
 }
-  
+
+#features {
+  margin-top: 3vh; 
+}
+
 section {
   max-width: 800px;
   margin: 30px auto;
@@ -86,7 +94,7 @@ h2 {
   color: #0a4650;
 }
   
-ul, ol {
+ul {
   padding-left: 20px;
 }
 

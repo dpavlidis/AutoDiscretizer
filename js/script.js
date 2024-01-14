@@ -82,6 +82,8 @@ $(document).ready(function () {
         $('#modal-title').html(title);
         $('#modal-message').html(message);
         $('#modal-toggle').prop('checked', true);
+        $('.spinner-cst1').hide();
+        $('.spinner-cst2').hide();
     }
 
     //--------------------------------------------------------------------- API:
@@ -101,8 +103,8 @@ $(document).ready(function () {
 
         var fileType = file.name.split('.').pop().toLowerCase();
 
-        if ($.inArray(fileType, ['csv', 'xlsx', 'xls']) === -1) {
-            $(".file-message").text("Please upload a valid CSV, XLSX, or XLS file.");
+        if ($.inArray(fileType, ['csv']) === -1) {
+            $(".file-message").text("Please upload a valid CSV file.");
             $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .table-outer-container3, .display-div, .down-but, .spinner-cst1").hide();
             return;
         }
@@ -165,7 +167,7 @@ $(document).ready(function () {
                 } else if (flag === true) {
                     displayTable(response.dataset, flag);
                 } else {
-                    console.log("error flag");
+                    openModal('Error Dataset', 'Please choose binned or unbinned!');
                 }
                 $('.spinner-cst1').hide();
             },
@@ -229,13 +231,14 @@ $(document).ready(function () {
             $('.down-but').show();
 
         } else {
-            console.log("error flag");
+            openModal('Error Dataset', 'Please choose binned or unbinned!');
         }
     }
 
 
     function displayCheckboxes(headers) {
         $('.checkbox-container').show();
+        $('.checkbox-content').empty();
         var checkboxHtml = '<form>';
         checkboxNames = [];
         $.each(headers, function (index, header) {
@@ -248,7 +251,7 @@ $(document).ready(function () {
         });
         checkboxHtml += '</form>';
 
-        $('.checkbox-container').html(checkboxHtml);
+        $('.checkbox-content').append(checkboxHtml);
     }
 
 
@@ -315,10 +318,10 @@ $(document).ready(function () {
         var autoCheck = false;
 
         if (checkBox.prop("checked")) {
-            console.log("Auto is checked");
+            //console.log("Auto is checked");
             autoCheck = true;
         } else {
-            console.log("Auto is not checked");
+            //console.log("Auto is not checked");
             autoCheck = false;
         }
 
@@ -360,7 +363,7 @@ $(document).ready(function () {
 
 
         if (isValid && autoCheck === false && strategy != 'Auto') {
-            console.log("checks passed.");
+
             $('.spinner-cst2').show();
             $('.table-outer-container2').hide();
             $('.table-outer-container3').hide();
@@ -390,6 +393,7 @@ $(document).ready(function () {
                 error: function (jqXHR, textStatus, errorThrown) {
                     $('.spinner-cst2').hide();
                     console.log("Error during discretize:", textStatus, errorThrown);
+                    openModal('Error During Discretization', 'Wrong Dataset Format!');
                     $('.cst-Disc').prop('disabled', false);
                 }
             });
@@ -424,11 +428,20 @@ $(document).ready(function () {
                 }),
                 contentType: 'application/json',
                 dataType: 'json',
+                timeout: 40000,
                 success: function (response) {
 
-                    var responseData = JSON.parse(response.output[0]);
+                    var responseData;
+                    var bestAccuracy
 
-                    var bestAccuracy = responseData.best_accuracy;
+                    if (response && response.output && response.output[0]) {           
+                        responseData = JSON.parse(response.output[0]);
+                        bestAccuracy = responseData.best_accuracy;
+                    } else { 
+                        openModal('Dataset Format Error', 'Wrong Dataset Format!');
+                        $('.spinner-cst2').hide();
+                        return;
+                    }
 
                     var flag = true;
                     getDatasetContent(dataset, flag);
@@ -482,6 +495,7 @@ $(document).ready(function () {
                     $('.spinner-cst2').hide();
                     console.log("Error during discretize:", textStatus, errorThrown);
                     $('.cst-Disc').prop('disabled', false);
+                    openModal('Dataset Format Error', 'Wrong Dataset Format!');
                 }
             });
 
@@ -489,7 +503,6 @@ $(document).ready(function () {
 
         else {
             $('.spinner-cst2').hide();
-            console.log("checks failed..");
         }
 
     });

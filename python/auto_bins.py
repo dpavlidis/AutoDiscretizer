@@ -7,6 +7,7 @@ import sys
 import os
 import json 
 import warnings
+from sklearn.preprocessing import LabelEncoder
 
 warnings.filterwarnings("ignore")
 
@@ -15,21 +16,40 @@ strategy = sys.argv[2]
 target_class = sys.argv[3]
 selected_columns = sys.argv[4:]
 
-data = pd.read_csv(csv_file, sep=";", quotechar='"')
+data = pd.read_csv(csv_file, sep=",", quotechar='"')
 
 if len(data.columns) == 1:
-    data = pd.read_csv(csv_file, sep=",", quotechar='"')
+    data = pd.read_csv(csv_file, sep=";", quotechar='"')
 
 selected_columns = list(map(str.strip, selected_columns))
 
+non_numeric_columns = []
+
+le = LabelEncoder()
+
+for column in data.columns:
+    if column != target_class and data[column].dtype not in ['int64', 'float64']:
+        non_numeric_columns.append(column)
+
+
+for column in non_numeric_columns:
+    data[column] = le.fit_transform(data[column])
+    
+V = data.loc[:, non_numeric_columns]
+
 X = data.loc[:, selected_columns]
 y = data[target_class]
+
+combined_data = pd.concat([V, X], axis=1)
+
+if target_class in combined_data.columns:
+    combined_data = combined_data.drop(target_class, axis=1)
 
 best_accuracy = 0
 best_bin_number = 0
 best_binned_dataset = None
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=125)
+X_train, X_test, y_train, y_test = train_test_split(combined_data, y, test_size=0.33, random_state=125)
 
 for n_bins in range(2, 21):
     kbins = KBinsDiscretizer(n_bins=n_bins, encode='ordinal', strategy=strategy, subsample=None)
@@ -42,7 +62,7 @@ for n_bins in range(2, 21):
 
     y_pred = nb_classifier.predict(X_test_binned)
     accuracy = accuracy_score(y_test, y_pred)
-
+    
     if accuracy > best_accuracy:
             best_accuracy = accuracy
             best_binned_dataset = X_train_binned
@@ -56,7 +76,7 @@ kbins_best.fit(data[selected_columns])
 data_binned = kbins_best.transform(data[selected_columns])
 
 for i, col in enumerate(selected_columns):
-    data[col] = data_binned[:, i]
+    data[col] = data_binned[:, i].astype(int)
 
 best_accuracy = round(best_accuracy, 4)
 

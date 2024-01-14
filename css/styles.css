@@ -272,7 +272,6 @@ body {
 }
 
 .method-container,
-.checkbox-container,
 .bins-container {
   margin-left: 20vw;
   margin-right: 20vw;
@@ -287,9 +286,36 @@ body {
   display: flex;
 }
 
-.method-container,
 .checkbox-container {
+  margin-left: 20vw;
+  margin-right: 20vw;
+  margin-top: 1vw;
+  width: 60vw;
+  position: relative;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: 0.2s;
+  padding: 25px 45px 45px 45px;
+  background-color: white;
+}
+
+.method-container {
   justify-content: space-between;
+}
+
+.checkbox-title {
+  padding-bottom: 16px;
+  display: flex;
+}
+
+h5 {
+  margin-left: 12px;
+  font-size: 23px;
+}
+
+.fa-caret-right {
+  margin-top: 2px;
+  font-size: 24px;
 }
 
 @media only screen and (max-width: 768px) {

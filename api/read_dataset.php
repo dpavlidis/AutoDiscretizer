@@ -40,16 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 }
 
                 fclose($file);
-            } elseif ($file_extension === 'xlsx' || $file_extension === 'xls') {
-                require __DIR__ . '/vendor/autoload.php';
-
-                $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReaderForFile($file_path);
-                $spreadsheet = $reader->load($file_path);
-                $worksheet = $spreadsheet->getActiveSheet();
-
-                foreach ($worksheet->getRowIterator() as $row) {
-                    $data[] = preg_split('/[;,]/', implode('', $row->toArray()));
-                }
             } else {
                 header('HTTP/1.1 400 Bad Request');
                 echo 'Error: Unsupported file format';
@@ -92,12 +82,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 }
             }
 
-
-            $response = array(
-                'numericColumns' => $numericColumns,
-                'categoricalIntegerColumns' => $categoricalIntegerColumns,
-                'dataset' => array_slice($data, 0, 21)
-            );
+            if ($binned === 'false') {
+                $response = array(
+                    'numericColumns' => $numericColumns,
+                    'categoricalIntegerColumns' => $categoricalIntegerColumns,
+                    'dataset' => array_slice($data, 0, 21)
+                );
+            } elseif ($binned === 'true') {
+                $response = array(
+                    'dataset' => array_slice($data, 0, 21)
+                );
+            } else {
+                header('HTTP/1.1 400 Bad Request');
+                echo 'Error: Unsupported binned value';
+                exit;
+            }
 
             header('Content-Type: application/json');
             echo json_encode($response, JSON_PRETTY_PRINT);

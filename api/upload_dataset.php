@@ -17,10 +17,10 @@ if (isset($_FILES['file']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $uploadedFile = $uploadDir . basename($_FILES['file']['name']);
     $fileType = strtolower(pathinfo($uploadedFile, PATHINFO_EXTENSION));
 
-    $allowedExtensions = ['csv', 'xlsx', 'xls'];
+    $allowedExtensions = ['csv'];
 
     if (!in_array($fileType, $allowedExtensions)) {
-        echo 'Invalid file format. Please upload a valid CSV, XLSX, or XLS file.';
+        echo 'Invalid file format. Please upload a valid CSV file.';
         exit;
     }
 
@@ -42,7 +42,6 @@ if (isset($_FILES['file']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     header('HTTP/1.1 400 Bad Request');
     echo 'Invalid request method.';
 }
-
 
 function checkForNumericColumn($filePath)
 {

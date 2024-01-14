@@ -11,10 +11,10 @@ strategy = sys.argv[2]
 bins = int(sys.argv[3])
 selected_columns = sys.argv[4:]
 
-data = pd.read_csv(csv_file, sep=";", quotechar='"')
+data = pd.read_csv(csv_file, sep=",", quotechar='"')
 
 if len(data.columns) == 1:
-    data = pd.read_csv(csv_file, sep=",", quotechar='"')
+    data = pd.read_csv(csv_file, sep=";", quotechar='"')
 
 selected_columns = list(map(str.strip, selected_columns))
 
