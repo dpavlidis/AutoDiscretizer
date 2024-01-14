@@ -157,6 +157,44 @@ body {
   padding: 8px 15px; 
 }
 
+.test-datasets-container {
+  margin-left: 20vw;
+  margin-right: 20vw;
+  margin-top: 32vh;
+  width: 60vw;
+  position: relative;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: 0.2s;
+  padding: 30px 40px 40px 40px;
+  background-color: white;
+}
+
+.test_datasets {
+  padding-left: 10px;
+  padding-top: 4px;
+}
+
+.test_datasets a img {
+  width: 32px; 
+  height: 32px; 
+}
+
+.fa-database {
+  margin-left: 10px;
+  margin-top: 3px;
+  font-size: 20px;
+}
+
+.test_datasets a {
+  margin-right: 42px; 
+}
+
+.checkbox-title h5 {
+  margin-left: 12px;
+  font-size: 20px;
+}
+
 .cst-Disc {
   border-color: #060f11;
   margin-left: 18vw;
@@ -479,7 +517,8 @@ footer,
   .table-outer-container3,
   .checkbox-container,
   .method-container,
-  .bins-container {
+  .bins-container
+  .test-datasets-container {
     margin-top: 2vh;
     width: 70vw;
     margin-left: 15vw;
@@ -533,12 +572,17 @@ footer,
   .table-outer-container3,
   .checkbox-container,
   .method-container,
-  .bins-container {
+  .bins-container
+  .test-datasets-container {
     margin-top: 2vh;
     width: 90vw;
     margin-left: 5vw;
     margin-right: 5vw;
     padding: 15px;
+  }
+
+  .test-datasets-container{
+    padding: 24px;
   }
 
   .upload-container{

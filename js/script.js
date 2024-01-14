@@ -92,12 +92,14 @@ $(document).ready(function () {
 
         $('.spinner-cst1').show();
         $('.table-outer-container3').hide();
+        $('.test-datasets-container').hide();
 
         var file = $('.file-input')[0].files[0];
 
         if (!file) {
             $(".file-message").text("Please upload a dataset.");
             $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .table-outer-container3, .display-div, .down-but, .spinner-cst1").hide();
+            $('.test-datasets-container').show();
             return;
         }
 
@@ -106,6 +108,7 @@ $(document).ready(function () {
         if ($.inArray(fileType, ['csv']) === -1) {
             $(".file-message").text("Please upload a valid CSV file.");
             $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .table-outer-container3, .display-div, .down-but, .spinner-cst1").hide();
+            $('.test-datasets-container').show();
             return;
         }
 

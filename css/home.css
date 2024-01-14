@@ -28,6 +28,10 @@ p {
   font-style: italic;
 }
 
+.fa-num {
+  font-size: 14px;
+}
+
 .navbar {
   position: fixed;
   background-color: white;
