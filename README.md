@@ -1,1 +1,1 @@
-# KBinsDiscretizer
+# AutoDiscretizer
