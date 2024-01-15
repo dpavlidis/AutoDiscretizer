@@ -51,7 +51,7 @@ best_binned_dataset = None
 X_train, X_test, y_train, y_test = train_test_split(combined_data, y, test_size=0.33, random_state=125)
 
 for strategy in ['uniform', 'quantile', 'kmeans']:
-    kbins = KBinsDiscretizer(n_bins=bins, encode='ordinal', strategy=strategy, subsample=None)
+    kbins = KBinsDiscretizer(n_bins=bins, encode='ordinal', strategy=strategy)
     
     X_train_binned = kbins.fit_transform(X_train)
     X_test_binned = kbins.transform(X_test)
