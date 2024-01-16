@@ -396,7 +396,7 @@ $(document).ready(function () {
                 error: function (jqXHR, textStatus, errorThrown) {
                     $('.spinner-cst2').hide();
                     console.log("Error during discretize:", textStatus, errorThrown);
-                    openModal('Error During Discretization', 'Wrong Dataset Format!');
+                    openModal('Error During Discretization', 'Invalid Dataset Format!');
                     $('.cst-Disc').prop('disabled', false);
                 }
             });
@@ -441,7 +441,7 @@ $(document).ready(function () {
                         responseData = JSON.parse(response.output[0]);
                         bestAccuracy = responseData.best_accuracy;
                     } else { 
-                        openModal('Dataset Format Error', 'Wrong Dataset Format!');
+                        openModal('Dataset Format Error', 'Invalid Dataset Format!');
                         $('.spinner-cst2').hide();
                         return;
                     }
@@ -498,7 +498,7 @@ $(document).ready(function () {
                     $('.spinner-cst2').hide();
                     console.log("Error during discretize:", textStatus, errorThrown);
                     $('.cst-Disc').prop('disabled', false);
-                    openModal('Dataset Format Error', 'Wrong Dataset Format!');
+                    openModal('Dataset Format Error', 'Invalid Dataset Format!');
                 }
             });
 

@@ -666,6 +666,14 @@ footer,
   }
 }
 
+.hover-link img {
+  transition: all 0.3s ease; 
+}
+
+.hover-link:hover img {
+  transform: scale(1.32); 
+}
+
 .modal-container {
   margin: 60px auto;
   padding-top: 0px;
