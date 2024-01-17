@@ -82,7 +82,7 @@ if (!isset($data['dataset'], $data['checkedCheckboxes'], $data['strategy'], $dat
     echo json_encode(['output' => $output], JSON_PRETTY_PRINT);
 } else {
     log_error('Invalid request method');
-    header('HTTP/1.1 400 Bad Request');
+    header("HTTP/1.1 403 Forbidden");
     echo json_encode(['error' => 'Invalid request method']);
 }
 

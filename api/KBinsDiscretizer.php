@@ -9,6 +9,7 @@ $data = json_decode($json_data, true);
 $dataset_name = isset($data['dataset']) ? filter_var($data['dataset'], FILTER_SANITIZE_STRING) : null;
 if (!$dataset_name) {
     log_error('Invalid dataset name');
+    header('HTTP/1.1 400 Bad Request');
     echo json_encode(['error' => "Invalid dataset name"]);
     exit;
 } else {
@@ -19,6 +20,7 @@ error_log("Received JSON data: " . print_r($data, true));
 
 if (!isset($data['dataset'], $data['checkedCheckboxes'], $data['strategy'], $data['bins'])) {
     log_error('Invalid JSON structure');
+    header('HTTP/1.1 400 Bad Request');
     echo json_encode(['error' => 'Invalid JSON structure']);
     exit;
 }
@@ -33,6 +35,7 @@ if (!isset($data['dataset'], $data['checkedCheckboxes'], $data['strategy'], $dat
 
     if (!file_exists($target_file) || !is_readable($target_file)) {
         log_error('Invalid target file path');
+        header('HTTP/1.1 400 Bad Request');
         echo json_encode(['error' => 'Invalid target file path']);
         exit;
     }
@@ -44,15 +47,16 @@ if (!isset($data['dataset'], $data['checkedCheckboxes'], $data['strategy'], $dat
 
     if ($return_var !== 0) {
         log_error('Error executing Python script', $output);
+        header('HTTP/1.1 400 Bad Request');
         echo json_encode(['error' => 'Error executing Python script']);
         exit;
     }
 
     header('Content-Type: application/json');
-
     echo json_encode(['message' => $output]);
 } else {
     log_error('Invalid request method');
+    header("HTTP/1.1 403 Forbidden");
     echo json_encode(['error' => 'Invalid request method']);
 }
 
