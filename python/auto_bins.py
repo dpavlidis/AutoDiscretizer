@@ -47,7 +47,6 @@ if target_class in combined_data.columns:
 
 best_accuracy = 0
 best_bin_number = 0
-best_binned_dataset = None
 
 X_train, X_test, y_train, y_test = train_test_split(combined_data, y, test_size=0.33, random_state=125)
 
@@ -65,7 +64,6 @@ for n_bins in range(2, 21):
     
     if accuracy > best_accuracy:
             best_accuracy = accuracy
-            best_binned_dataset = X_train_binned
             best_bin_number = n_bins
 
 

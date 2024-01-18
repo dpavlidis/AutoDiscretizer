@@ -46,7 +46,6 @@ if target_class in combined_data.columns:
 
 best_accuracy = 0
 best_strategy = ''
-best_binned_dataset = None
 
 X_train, X_test, y_train, y_test = train_test_split(combined_data, y, test_size=0.33, random_state=125)
 
@@ -65,7 +64,6 @@ for strategy in ['uniform', 'quantile', 'kmeans']:
     if accuracy > best_accuracy:
             best_accuracy = accuracy
             best_strategy = strategy
-            best_binned_dataset = X_train_binned
 
 
 kbins_best = KBinsDiscretizer(n_bins=bins, encode='ordinal', strategy=best_strategy)
