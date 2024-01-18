@@ -47,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             }
 
             $numericColumns = array();
-            $categoricalIntegerColumns = array();
             foreach ($data[0] as $index => $columnName) {
                 $isNumeric = true;
                 for ($i = 1; $i < count($data); $i++) {
@@ -61,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 }
             }
 
+            $categoricalIntegerColumns = array();
             foreach ($data[0] as $index => $columnName) {
                 $isInteger = true;
                 $hasCategorical = false;
@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         }
     } else {
         header('HTTP/1.1 400 Bad Request');
-        echo 'Error: No dataset specified in the URL';
+        echo 'Error: Required parameters have not been specified.';
     }
 } else {
     header("HTTP/1.1 403 Forbidden");
