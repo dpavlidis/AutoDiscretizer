@@ -42,7 +42,10 @@ if (!isset($data['dataset'], $data['checkedCheckboxes'], $data['strategy'], $dat
 
     $pythonScript = "../python/KBinsDiscretizer.py";
 
-    $command = "python $pythonScript " . escapeshellarg($target_file) . " " . escapeshellarg($strategy) . " " . escapeshellarg($bins) . " " . implode(' ', array_map('escapeshellarg', $columns)) . " 2>&1";
+    $command = "python $pythonScript " . escapeshellarg($target_file) . " " . 
+           escapeshellarg($strategy) . " " . escapeshellarg($bins) . " " .
+           implode(' ', array_map('escapeshellarg', $columns)) . " 2>&1";
+
     exec($command, $output, $return_var);
 
     if ($return_var !== 0) {
