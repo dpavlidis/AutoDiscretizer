@@ -177,6 +177,7 @@ $(document).ready(function () {
             error: function (error) {
                 $('.spinner-cst1').hide();
                 console.error("Error getting dataset content:", error);
+                openModal('Error Dataset', 'Unable to load the dataset');
             }
         });
     }
