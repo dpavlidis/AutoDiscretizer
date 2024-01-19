@@ -83,8 +83,8 @@ for i, col in enumerate(selected_columns):
 
 best_accuracy = round(best_accuracy, 4)
 
-
-print(json.dumps({"best_accuracy": best_accuracy, "best_strategy": best_strategy, "best_bin_number": best_bin_number, "script": "auto_all"}))
+print(json.dumps({"best_accuracy": best_accuracy, "best_strategy": best_strategy, \
+"best_bin_number": best_bin_number, "script": "auto_all"}))
 
 base_name = os.path.splitext(os.path.basename(csv_file))[0]
 
