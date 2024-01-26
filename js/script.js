@@ -163,15 +163,17 @@ $(document).ready(function () {
             dataType: "json",
             success: function (response) {
 
-                if (flag === false) {
+                if (flag !== undefined) {
                     displayTable(response.dataset, flag);
-                    displayCheckboxes(response.numericColumns);
-                    updateDropdown(response.categoricalIntegerColumns);
-                } else if (flag === true) {
-                    displayTable(response.dataset, flag);
+                
+                    if (!flag) {
+                        displayCheckboxes(response.numericColumns);
+                        updateDropdown(response.categoricalIntegerColumns);
+                    }
                 } else {
                     openModal('Error Dataset', 'Please choose binned or unbinned!');
                 }
+                
                 $('.spinner-cst1').hide();
             },
             error: function (error) {
