@@ -55,13 +55,16 @@ $(document).ready(function () {
     $(document).on('change', '.file-input', function () {
         var filesCount = this.files.length;
         var textbox = $(this).prev();
+        textbox.text('or drag and drop dataset here');
 
         if (filesCount === 1) {
             var fileName = this.value.split('\\').pop();
             textbox.text(fileName);
-        } else {
-            textbox.text('Please select only one file');
         }
+
+        if (filesCount > 1) {
+            textbox.text('Please select only one file');
+        } 
     });
 
     $('.file-input').on('change', function () {
