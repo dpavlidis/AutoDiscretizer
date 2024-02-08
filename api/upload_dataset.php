@@ -2,10 +2,6 @@
 header("Access-Control-Allow-Origin: *");
 ini_set('upload_max_filesize', '1M');
 
-require '../vendor/autoload.php';
-
-use PhpOffice\PhpSpreadsheet\IOFactory;
-
 if (isset($_FILES['file']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $uploadDir = '../datasets/';
 
@@ -43,24 +39,44 @@ if (isset($_FILES['file']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     echo 'Invalid request method.';
 }
 
-function checkForNumericColumn($filePath)
-{
-    try {
-        $spreadsheet = IOFactory::load($filePath);
-        $sheet = $spreadsheet->getActiveSheet();
+function checkForNumericColumn($filePath) {
+ 
+    if (($handle = fopen($filePath, "r")) !== FALSE) {
 
-        foreach ($sheet->getRowIterator() as $row) {
-            foreach ($row->getCellIterator() as $cell) {
-                $value = $cell->getValue();
-                if (is_numeric($value)) {
-                    return true;
+        $firstLine = fgets($handle);
+        $commaCount = substr_count($firstLine, ',');
+        $semicolonCount = substr_count($firstLine, ';');
+        $delimiter = $commaCount >= $semicolonCount ? ',' : ';';
+
+        rewind($handle);
+
+        $numericColumns = [];
+        $headerRead = false;
+
+        while (($data = fgetcsv($handle, 1000, $delimiter)) !== FALSE) {
+            if (!$headerRead) {
+                foreach ($data as $index => $column) {
+                    $numericColumns[$index] = true;
+                }
+                $headerRead = true;
+                continue;
+            }
+
+            foreach ($data as $index => $value) {
+                if (!is_numeric(trim($value))) {
+                    $numericColumns[$index] = false;
                 }
             }
         }
 
-        return false;
-    } catch (Exception $e) {
-        return false;
+        fclose($handle);
+        foreach ($numericColumns as $isNumeric) {
+            if ($isNumeric) {
+                return true; 
+            }
+        }
     }
+    return false;
 }
+
 ?>
