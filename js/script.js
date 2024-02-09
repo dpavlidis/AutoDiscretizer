@@ -111,7 +111,6 @@ $(document).ready(function () {
         if ($.inArray(fileType, ['csv']) === -1) {
             $(".file-message").text("Please upload a valid CSV file.");
             $(".table-outer-container, .checkbox-container, .method-container, .bins-container, .table-outer-container2, .table-outer-container3, .display-div, .down-but, .spinner-cst1").hide();
-            $('.test-datasets-container').show();
             return;
         }
 
@@ -146,7 +145,7 @@ $(document).ready(function () {
                 error: function () {
                     $('.spinner-cst1').hide();
                     $('#uploadBtn').prop('disabled', false);
-                    $('#table-container').text('Error uploading file.');
+                    openModal('Error Dataset', 'Unable to load this dataset');
                 }
             });
         } else {
