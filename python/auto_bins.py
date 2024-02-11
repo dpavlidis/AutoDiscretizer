@@ -31,6 +31,7 @@ for column in data.columns:
     if column != target_class and data[column].dtype not in ['int64', 'float64']:
         non_numeric_columns.append(column)
 
+data_copy = data[non_numeric_columns]
 
 for column in non_numeric_columns:
     data[column] = le.fit_transform(data[column])
@@ -70,6 +71,8 @@ for n_bins in range(2, 21):
 
 kbins_best = KBinsDiscretizer(n_bins=best_bin_number, encode='ordinal', strategy=strategy)
 kbins_best.fit(data[selected_columns]) 
+
+data[non_numeric_columns] = data_copy
 
 data_binned = kbins_best.transform(data[selected_columns])
 
