@@ -77,7 +77,7 @@ data[non_numeric_columns] = data_copy
 data_binned = kbins_best.transform(data[selected_columns])
 
 for i, col in enumerate(selected_columns):
-    data[col] = data_binned[:, i].astype(int)
+    data[col] = data_binned[:, i].astype(int).astype(str)
 
 best_accuracy = round(best_accuracy, 4)
 

@@ -23,7 +23,7 @@ X = data.loc[:, selected_columns]
 kbins = KBinsDiscretizer(n_bins=bins, encode='ordinal', strategy=strategy)
 X_binned = kbins.fit_transform(X)
 
-X_binned = X_binned.astype(int)
+X_binned = X_binned.astype(int).astype(str)
 
 data[selected_columns] = X_binned
 
