@@ -21,5 +21,5 @@ AutoDiscretizer is a web application built with Python, leveraging the KBinsDisc
 
 **[AutoDiscretizer](https://kclusterhub.iee.ihu.gr/autodiscretizer/)**
 
-Experience the simplicity of data discretization with our web application.
+Experience the simplicity of data discretization.
 
