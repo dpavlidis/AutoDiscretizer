@@ -4,7 +4,7 @@ AutoDiscretizer is a web application built with Python, leveraging the KBinsDisc
 
 ### Features
 
-- **User-Friendly Interface**: Upload your dataset and navigate through the discretization steps with a simple, intuitive interface that’s accessible for users of all experience levels.
+- **User-Friendly Interface**: Upload your dataset and navigate through the discretization steps with a simple interface that’s accessible for users of all experience levels.
 
 - **Column Selection**: Choose specific columns to discretize, giving you full control and flexibility over which features to preprocess.
 
