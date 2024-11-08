@@ -15,7 +15,7 @@ AutoDiscretizer is a web application built with Python, leveraging the KBinsDisc
 
 - **Manual Binning**: Set the number of bins for each selected column to achieve your desired level of data granularity.
 
-- **Auto Options**: Let AutoDiscretizer automate binning! Using machine learning, specifically Naive Bayes, the app can automatically determine the optimal number of bins or strategy based on accuracy, helping you streamline your preprocessing without compromising on precision.
+- **Auto Options**: Let AutoDiscretizer automate binning! Using machine learning, specifically Naive Bayes, the app can automatically determine the optimal number of bins or strategy based on accuracy.
 
 ## Visit the AutoDiscretizer Web Application 🚀
 
